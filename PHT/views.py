@@ -354,4 +354,5 @@ def product(request,pk):
     return render(request,'PHT/product.html',context)  
 
 def databasePage(request):
+    print("database")
     return render(request,'PHT/database.html')      
