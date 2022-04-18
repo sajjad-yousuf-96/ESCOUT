@@ -1,0 +1,678 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>ESCOUT</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <!-- Icon -->
+    <link rel="stylesheet" href="{% static 'assets/fonts/line-icons.css' %}">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.theme.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/nivo-lightbox.css' %}">
+    <!-- Animate -->
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+    <style>
+        .bt1:hover {
+            color: #F63854 !important;
+            background-color: white !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Area wrapper Starts -->
+    <header id="header-wrap">
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand-md bg-white fixed-top scrolling-navbar">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <a href="index.html" class="navbar-brand"><img style="width: 240px;height: 80px;"
+                        src="{% static 'images/LGOG-01.svg' %}" alt=""></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="lni-menu"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto w-100 justify-content-end clearfix">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#hero-area">
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#services">
+                                Services
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#mission">
+                                Mission
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#pricing">
+                                Pricing
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">
+                                Contact
+                            </a>
+                        </li>
+                        <li class="nav-item ml-5">
+                            <a class="nav-link" href="{% url 'login' %}">
+                                Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-common bt1" href="{% url 'register'%}">
+                                Signup
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Navbar End -->
+
+        <!-- Hero Area Start -->
+        <div id="hero-area" class="hero-area-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+                        <div class="contents">
+                            <h2 class="head-title">Build Better Products with Escout</h2>
+                            <p>A Powerful Product Analytics to help you convert, engage and retain more users. We help
+                                you in product hunting, tracking, keyword research, profit calculation, product
+                                evaluation and ranking.</p>
+                            <div class="header-button">
+                                <a rel="nofollow" href="https://rebrand.ly/fusion-ud" class="btn btn-common">Start
+                                    Now</a>
+                                <a href="#" class="btn btn-border video-popup">Intro Video</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                        <div class="intro-img">
+                            <img class="img-fluid" src="{% static 'assets/img/intro-mobile.png' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Hero Area End -->
+
+    </header>
+    <!-- Header Area wrapper End -->
+
+    <!-- Services Section Start -->
+    <section id="services" class="section-padding">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Our Services</h2>
+                <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
+            </div>
+            <div class="row">
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-4 col-xs-12">
+                    <div class="services-item wow fadeInRight" data-wow-delay="0.3s">
+                        <div class="icon">
+                            <i class="lni-cog"></i>
+                        </div>
+                        <div class="services-content">
+                            <h3><a href="#">Product Hunting</a></h3>
+                            <p>Short of product ideas? Our product database is the best place for you to kick off
+                                product research</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-4 col-xs-12">
+                    <div class="services-item wow fadeInRight" data-wow-delay="0.6s">
+                        <div class="icon">
+                            <i class="lni-stats-up"></i>
+                        </div>
+                        <div class="services-content">
+                            <h3><a href="#">Product Ranking</a></h3>
+                            <p>Track Products over period of time to analyze their sales, reviews and other performance
+                                metrics</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-4 col-xs-12">
+                    <div class="services-item wow fadeInRight" data-wow-delay="0.9s">
+                        <div class="icon">
+                            <i class="lni-users"></i>
+                        </div>
+                        <div class="services-content">
+                            <h3><a href="#">Reliable Data Metrics</a></h3>
+                            <p>We ensure that we provide you the right numbers which helps you in evaluating the product
+                                potential</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-4 col-xs-12">
+                    <div class="services-item wow fadeInRight" data-wow-delay="1.2s">
+                        <div class="icon">
+                            <i class="lni-layers"></i>
+                        </div>
+                        <div class="services-content">
+                            <h3><a href="#">Keyword Research</a></h3>
+                            <p>Uncover the buyer keywords that are driving product sales for your competitors</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-4 col-xs-12">
+                    <div class="services-item wow fadeInRight" data-wow-delay="1.5s">
+                        <div class="icon">
+                            <i class="lni-mobile"></i>
+                        </div>
+                        <div class="services-content">
+                            <h3><a href="#">Spy on Competitors</a></h3>
+                            <p>Monitor all your competitors sales, pricing, keywords, and stock levels to gain an
+                                advantage</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-4 col-xs-12">
+                    <div class="services-item wow fadeInRight" data-wow-delay="1.8s">
+                        <div class="icon">
+                            <i class="lni-rocket"></i>
+                        </div>
+                        <div class="services-content">
+                            <h3><a href="#">Profit Calculator</a></h3>
+                            <p>Profit calculator helps you know the profitability of the product</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Services Section End -->
+
+    <!-- About Section start -->
+    <div class="about-area section-padding bg-gray" id="mission">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-xs-12 info">
+                    <div class="about-wrapper wow fadeInLeft" data-wow-delay="0.3s">
+                        <div>
+                            <div class="site-heading">
+                                <h2 class="section-title">Our Mission is to Help Sellers</h2>
+                            </div>
+                            <div class="content">
+                                <p>
+                                    Escout help sellers to succesfully launch their business, maintain profitability and
+                                    multiple the income.
+                                    To Best Selling Product Idea which gives best sales, high profit, and low
+                                    competition
+                                </p>
+                                <a href="#" class="btn btn-common mt-3">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-xs-12 wow fadeInRight" data-wow-delay="0.3s">
+                    <img class="img-fluid" src="{% static 'assets/img/about/img-1.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Section End -->
+
+    <!-- Features Section Start -->
+    <section id="features" class="section-padding">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Awesome Features</h2>
+                <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                    <div class="content-left">
+                        <div class="box-item wow fadeInLeft" data-wow-delay="0.3s">
+                            <span class="icon">
+                                <i class="lni-rocket"></i>
+                            </span>
+                            <div class="text">
+                                <h4>Sales & Revenue</h4>
+                                <p>Track estimated daily sales and revenue of Daraz products</p>
+                            </div>
+                        </div>
+                        <div class="box-item wow fadeInLeft" data-wow-delay="0.6s">
+                            <span class="icon">
+                                <i class="lni-laptop-phone"></i>
+                            </span>
+                            <div class="text">
+                                <h4>Seller Info</h4>
+                                <p>Get seller information and overall ratings</p>
+                            </div>
+                        </div>
+                        <div class="box-item wow fadeInLeft" data-wow-delay="0.9s">
+                            <span class="icon">
+                                <i class="lni-cog"></i>
+                            </span>
+                            <div class="text">
+                                <h4>Profit Calculator</h4>
+                                <p>Get estimated profit in your product</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                    <div class="show-box wow fadeInUp" data-wow-delay="0.3s">
+                        <img src="{% static 'assets/img/feature/intro-mobile.png' %}" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                    <div class="content-right">
+                        <div class="box-item wow fadeInRight" data-wow-delay="0.3s">
+                            <span class="icon">
+                                <i class="lni-leaf"></i>
+                            </span>
+                            <div class="text">
+                                <h4>Reviews and Questions</h4>
+                                <p>Get accurate reviews and Questions to easily analyze product demand</p>
+                            </div>
+                        </div>
+                        <div class="box-item wow fadeInRight" data-wow-delay="0.6s">
+                            <span class="icon">
+                                <i class="lni-layers"></i>
+                            </span>
+                            <div class="text">
+                                <h4>Product Database</h4>
+                                <p>Get fully optmized product database</p>
+                            </div>
+                        </div>
+                        <div class="box-item wow fadeInRight" data-wow-delay="0.9s">
+                            <span class="icon">
+                                <i class="lni-leaf"></i>
+                            </span>
+                            <div class="text">
+                                <h4>Keyword, SKU & URL</h4>
+                                <p>Get desired prdouct result on one click</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Features Section End -->
+    <!-- Call To Action Section Start -->
+    <section id="cta" class="section-padding bg-gray py-5">
+        <div class=" container">
+            <!-- <div class="row"> -->
+            <div class="col-lg-12 col-md-12 col-xs-12 wow" data-wow-delay="0.3s">
+                <div class="cta-text">
+                    <h4>ARE YOU READY TO TAKE IN FIVE FIGURES A MONTH?</h4>
+                    <h5 style="text-align: center;margin-top: 20px;">THEN LET THIS HOT PRODUCT BE YOUR JOLT OF
+                        INSPIRATION
+                    </h5>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-xs-12 text-center wow" data-wow-delay="0.3s">
+                <br> <a href="#" class="btn btn-border">GET STARTED NOW</a>
+            </div>
+        </div>
+        <!-- </div> -->
+    </section>
+    <!-- Call To Action Section Start -->
+
+    <!-- Pricing section Start -->
+    <section id="pricing" class="section-padding">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Pricing</h2>
+                <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                    <div class="table wow fadeInLeft" data-wow-delay="1.2s">
+                        <div class="icon-box">
+                            <i class="lni-package"></i>
+                        </div>
+                        <div class="pricing-header">
+                            <p class="price-value">$10<span> /mo</span></p>
+                        </div>
+                        <div class="title">
+                            <h3>BASIC</h3>
+                        </div>
+                        <ul class="description">
+                            <li>1 user</li>
+                            <li>10 GB storage</li>
+                            <li>Email support</li>
+                            <li>Lifetime updates</li>
+                        </ul>
+                        <button class="btn btn-common">Purchase Now</button>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-xs-12 ">
+                    <div class="table wow fadeInUp" id="active-tb" data-wow-delay="1.2s">
+                        <div class="icon-box">
+                            <i class="lni-drop"></i>
+                        </div>
+                        <div class="pricing-header">
+                            <p class="price-value">$35<span> /mo</span></p>
+                        </div>
+                        <div class="title">
+                            <h3>Plus</h3>
+                        </div>
+                        <ul class="description">
+                            <li>10 user</li>
+                            <li>30 GB storage</li>
+                            <li>Priority email support</li>
+                            <li>Lifetime updates</li>
+                        </ul>
+                        <button class="btn btn-common">Purchase Now</button>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                    <div class="table wow fadeInRight" data-wow-delay="1.2s">
+                        <div class="icon-box">
+                            <i class="lni-star"></i>
+                        </div>
+                        <div class="pricing-header">
+                            <p class="price-value">$150<span> /mo</span></p>
+                        </div>
+                        <div class="title">
+                            <h3>Premium</h3>
+                        </div>
+                        <ul class="description">
+                            <li>Unlimited users</li>
+                            <li>Unlimited storage</li>
+                            <li>24/7 support</li>
+                            <li>Lifetime updates</li>
+                        </ul>
+                        <button class="btn btn-common">Purchase Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Pricing Table Section End -->
+
+    <!-- Testimonial Section Start -->
+    <!-- <section id="testimonial" class="testimonial section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div id="testimonials" class="owl-carousel wow fadeInUp" data-wow-delay="1.2s">
+                        <div class="item">
+                            <div class="testimonial-item">
+                                <div class="img-thumb">
+                                    <img src="assets/img/testimonial/img1.jpg" alt="">
+                                </div>
+                                <div class="info">
+                                    <h2><a href="#">David Smith</a></h2>
+                                    <h3><a href="#">Creative Head</a></h3>
+                                </div>
+                                <div class="content">
+                                    <p class="description">Praesent cursus nulla non arcu tempor, ut egestas elit
+                                        tempus. In ac ex fermentum, gravida felis nec, tincidunt ligula.</p>
+                                    <div class="star-icon mt-3">
+                                        <span><i class="lni-star-filled"></i></span>
+                                        <span><i class="lni-star-filled"></i></span>
+                                        <span><i class="lni-star-filled"></i></span>
+                                        <span><i class="lni-star-filled"></i></span>
+                                        <span><i class="lni-star-half"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial-item">
+                                <div class="img-thumb">
+                                    <img src="assets/img/testimonial/img2.jpg" alt="">
+                                </div>
+                                <div class="info">
+                                    <h2><a href="#">Domeni GEsson</a></h2>
+                                    <h3><a href="#">Awesome Technology co.</a></h3>
+                                </div>
+                                <div class="content">
+                                    <p class="description">Praesent cursus nulla non arcu tempor, ut egestas elit
+                                        tempus. In ac ex fermentum, gravida felis nec, tincidunt ligula.</p>
+                                    <div class="star-icon mt-3">
+                                        <span><i class="lni-star-filled"></i></span>
+                                        <span><i class="lni-star-filled"></i></span>
+                                        <span><i class="lni-star-filled"></i></span>
+                                        <span><i class="lni-star-half"></i></span>
+                                        <span><i class="lni-star-half"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial-item">
+                                <div class="img-thumb">
+                                    <img src="assets/img/testimonial/img3.jpg" alt="">
+                                </div>
+                                <div class="info">
+                                    <h2><a href="#">Dommini Albert</a></h2>
+                                    <h3><a href="#">Nesnal Design co.</a></h3>
+                                </div>
+                                <div class="content">
+                                    <p class="description">Praesent cursus nulla non arcu tempor, ut egestas elit
+                                        tempus. In ac ex fermentum, gravida felis nec, tincidunt ligula.</p>
+                                    <div class="star-icon mt-3">
+                                        <span><i class="lni-star-filled"></i></span>
+                                        <span><i class="lni-star-filled"></i></span>
+                                        <span><i class="lni-star-filled"></i></span>
+                                        <span><i class="lni-star-filled"></i></span>
+                                        <span><i class="lni-star-half"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="testimonial-item">
+                                <div class="img-thumb">
+                                    <img src="assets/img/testimonial/img4.jpg" alt="">
+                                </div>
+                                <div class="info">
+                                    <h2><a href="#">Fernanda Anaya</a></h2>
+                                    <h3><a href="#">Developer</a></h3>
+                                </div>
+                                <div class="content">
+                                    <p class="description">Praesent cursus nulla non arcu tempor, ut egestas elit
+                                        tempus. In ac ex fermentum, gravida felis nec, tincidunt ligula.</p>
+                                    <div class="star-icon mt-3">
+                                        <span><i class="lni-star-filled"></i></span>
+                                        <span><i class="lni-star-filled"></i></span>
+                                        <span><i class="lni-star-half"></i></span>
+                                        <span><i class="lni-star-half"></i></span>
+                                        <span><i class="lni-star-half"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Testimonial Section End -->
+
+    <!-- Call To Action Section Start -->
+    <section id="cta2" class="py-4" style="background-color: #F63854;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-xs-12 wow fadeInLeft" data-wow-delay="0.3s">
+                    <div class="cta-text">
+                        <h4 style="color: white;">Get 30 days free trial</h4>
+                        <p style="color: white;">Get full access to Escout Features for 30 days. Pay once you get fully
+                            satisfied. If you are not 100% satisfied, cancel anytime request a refund, and get your
+                            money back. </p>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-6 col-md-6 col-xs-12 text-right wow fadeInRight" data-wow-delay="0.3s">
+                    <br><a href="#" class="btn btn-common">Register Now</a>
+                </div> -->
+            </div>
+        </div>
+    </section>
+    <!-- Call To Action Section Start -->
+
+    <!-- Contact Section Start -->
+    <!-- <section id="contact" class="section-padding bg-gray">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Countact Us</h2>
+                <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
+            </div>
+            <div class="row contact-form-area wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-7 col-md-12 col-sm-12">
+                    Call To Action Section Start
+                    <section id="cta1" class="section-padding">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12 wow fadeInLeft" data-wow-delay="0.3s">
+                                    <div class="cta-text">
+                                        <h4>You're Using Free Lite Version</h4>
+                                        <h5>Please purchase full version of the template to get all features and
+                                            facilities</h5>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12 text-right wow fadeInRight"
+                                    data-wow-delay="0.3s">
+                                    <br><a rel="nofollow" href="https://rebrand.ly/fusion-ud"
+                                        class="btn btn-common">Purchase Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    Call To Action Section Start
+                </div>
+                <div class="col-lg-5 col-md-12 col-xs-12">
+                    <div class="map">
+                        <object style="border:0; height: 280px; width: 100%;"
+                            data="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d34015.943594576835!2d-106.43242624069771!3d31.677719472407432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86e75d90e99d597b%3A0x6cd3eb9a9fcd23f1!2sCourtyard+by+Marriott+Ciudad+Juarez!5e0!3m2!1sen!2sbd!4v1533791187584"></object>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- Contact Section End -->
+
+    <!-- Footer Section Start -->
+    <footer id="contact" class="footer-area section-padding" style="padding-top: 80px;">
+        <div class="container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
+                        <div class="widget">
+                            <h3 class="footer-logo"><img style="width: 220px;height: 70px;"
+                                    src="{% static 'images/LGOGF-01.svg' %}" alt=""></h3>
+                            <div class="textwidget">
+                                <p>Escout helps you in product hunting, tracking, keyword research, profit calculation,
+                                    product evaluation and ranking <br>Let us show you how we can help improve yours.
+                                </p>
+                            </div>
+                            <div class="social-icon">
+                                <a class="facebook" href="#"><i class="lni-facebook-filled"></i></a>
+                                <a class="twitter" href="#"><i class="lni-twitter-filled"></i></a>
+                                <a class="instagram" href="#"><i class="lni-instagram-filled"></i></a>
+                                <a class="linkedin" href="#"><i class="lni-linkedin-filled"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 pt-4">
+                        <h3 class="footer-titel">Products</h3>
+                        <ul class="footer-link">
+                            <li><a href="#">Tracking</a></li>
+                            <li><a href="#">Prdocut Database</a></li>
+                            <li><a href="#">Calculator</a></li>
+                            <li><a href="#">Ranking</a></li>
+                            <!-- <li><a href="#">Employee Management</a></li> -->
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 pt-4">
+                        <h3 class="footer-titel">Resources</h3>
+                        <ul class="footer-link">
+                            <li><a href="#">Seller Info</a></li>
+                            <li><a href="#">Tracking Scedule</a></li>
+                            <li><a href="#">Verification</a></li>
+                            <!-- <li><a href="#">Identity Verification</a></li> -->
+                            <li><a href="#">Card Verification</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 pt-4">
+                        <h3 class="footer-titel">Contact</h3>
+                        <ul class="address">
+                            <li>
+                                <a href="#"><i class="lni-map-marker"></i> 105 Pak Avenue - <br> Third Floor New
+                                    York, NY 10087</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="lni-phone-handset"></i> PH: +92 332 8832148</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="lni-envelope"></i> E: contact@escout.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copyright-content">
+                            <p>Copyright © 2022 <a rel="nofollow" href="#">ESCOUT</a> All Right
+                                Reserved</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Go to Top Link -->
+    <a href="#" class="back-to-top">
+        <i class="lni-arrow-up"></i>
+    </a>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader" id="loader-1"></div>
+    </div>
+    <!-- End Preloader -->
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'assets/js/jquery-min.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/js/wow.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.nav.js' %}"></script>
+    <script src="{% static 'assets/js/scrolling-nav.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'assets/js/waypoints.min.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

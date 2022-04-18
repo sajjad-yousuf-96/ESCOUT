@@ -1,0 +1,109 @@
+{%  extends 'PHT/main.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+<style>
+  .btn-primhassan{
+      color: #F63854;
+      position:relative; 
+      top:2px;
+	  border-color: violet;
+    }
+    .btn-primhassan:hover{
+    background-color: #F63854;
+    color: white;
+    font-size: bold;
+  }
+  table
+	 {
+		color: #f05f6c;
+		position: relative;
+		border: 2px solid black;
+		width: 100%;
+    height: 100%;
+		font-family: 'Times New Roman', Times, serif;
+	}
+
+	td,th {
+		position: relative;
+		border: 2px solid black;
+		width: 550px;
+		font-family: 'Times New Roman', Times, serif;
+	}
+    
+</style>
+<br>
+<div class="row">
+  <h5 style="
+  /* position: relative; */
+  color: #f05f6c;
+  margin-left: 26px;
+">PRODUCT TRACKING</h5>
+  
+  <hr>
+  <div class="card card-body" style="
+  width: 100%;
+  height: 100%;
+">
+    
+    <div>
+     
+        <h6>{{product.item_name}}
+        </h6>
+        <div class="input-group mb-3">
+          <div style="width: 10%;height: 100%;">
+            <h5>Schedular</h5><select name="category" id="category" style="width:120%;height: 100%;">
+              <option value="" selected disabled hidden>Choose Duration</option>
+              <option value="1">1-hour</option>
+              <option value="2">2-hour</option>
+              <option value="3">3-hour</option>
+              <option value="4">4-hour</option>
+              <option value="5">5-hour</option>
+          </select>
+          <a class="btn btn-primhassan"  href="#">Go</a>
+            
+        </div>
+      </div>
+      
+      <table>
+        <tr>
+          <th>SKU</th>
+          <td>{{product.sku}}</td>
+          <th>Revenue</th>
+          <td>468000</td>
+        </tr>
+        <tr>
+          <th>Company</th>
+          <td>{{product.shop_name}}</td>
+          <th>Sales</th>
+          <td>13-14</td>
+        </tr>
+        <tr>
+          <th>Brand</th>
+          <td>{{product.brand}}</td>
+          <th>Price</th>
+          <td>{{product.item_price}}</td>
+        </tr>
+        <tr>
+          <th>Seller</th>
+          <td>{{product.shop_name}}</td>
+          <th>Review</th>
+          <td>{{product.review}}</td>
+        </tr>
+        
+        <tr>
+          <th>Ratings</th>
+          <td>{{product.ratings}}</td>
+          <th>Ranking(1-10)</th>
+          <td>5</td>
+        </tr>
+        
+        
+      </table>
+    </div>
+
+
+  </div>
+</div>
+{% endblock %}
+

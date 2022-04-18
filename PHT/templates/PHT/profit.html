@@ -1,0 +1,204 @@
+{%  extends 'PHT/main.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
+<br>
+<style>
+    
+    .btn-primary{
+      color: #080103;
+      background-color: #f05f6c;
+      font-size: large;
+      border-color: #f05f6c;
+    }
+  .btn-primary:hover{
+    background-color: #080103;
+    font-size: bold;
+    color: #f05f6c;
+  }
+
+	table{
+        width: 100%;
+        table-layout: fixed;
+		position: relative;
+		font-family: 'Times New Roman', Times, serif;
+        text-align:center
+	}
+
+	td{
+		position: relative;
+		
+		font-family: 'Times New Roman', Times, serif;
+	}
+	th {
+		position: relative;
+		border:1px solid black;
+		color: #f05f6c;
+		font-family: 'Times New Roman', Times, serif;
+	}
+    
+</style>
+<div class="row">
+	<div class="col-md-5" style="position: relative;left: 15px;">
+		<h5 style="position: relative; 
+        color: #f05f6c;
+    ">PROFIT CALCULATOR</h5>
+		<hr>
+		<div class="card card-body" style="position: relative;">
+			<form method="POST">
+                {% csrf_token %}
+                <div style="width: 100%;">
+                    <div style="width: 100%;">
+                        <label>Daraz Market</label>
+                    </div>
+                    <div style="width: 100%;height: 100%;">
+                    <input name="symbol" type="text" value="Daraz Pakistan" style="
+                    width: 100%;
+                    height: 100%;
+                " disabled/>
+                    </div>
+                </div>
+                <div style="width: 100%;">
+                    <div style="width: 100%;">
+                        <label>Choose a Daraz Category:</label>
+                    </div>
+                    <div style="width: 100%;height: 100%;">
+                        <select name="category" id="category" style="width: 100%;height: 100%;">
+                        {% for cats in cate %}
+                            <option>{{cats.category}}</option>
+                        {% endfor %}
+                    </select>
+                    </div>
+                </div>
+                <div style="width: 100%;">
+                    <div style="width: 100%;">
+                        <label>Selling Price: </label>
+                    </div>
+                    <div style="width: 100%;height: 100%;">
+                        <input name="selling_price" type="number" style="width: 100%;height: 100%;"/>
+                    </div>
+                </div>
+                <div style="width: 100%">
+                    <div style="width: 100%;">
+                        <label>Deivery Charges:</label>
+                    </div>
+                    <div style="width: 100%;height: 100%;">
+                        <input name="Deivery" type="number" style="width: 100%;height: 100%;" />
+                    </div>
+                </div>
+                <div style="width: 100%;">
+                    <div style="width: 100%;">
+                        <label>Sourcing Price:</label>
+                    </div>
+                    <div style="width: 100%;height: 100%;">
+                        <input name="Sourcing Price" type="number" style="width: 100%;height: 100%;"/>
+                    </div>
+                </div>
+                
+            
+                <div style="width: 100%;">
+                    <div style="width: 100%;">
+                        <label>Top Competitor Average Sale(Per/Day) </label>
+                    </div>
+                    <div style="width: 100%;height: 100%;">
+                        <input name="competitor" type="number" style="width: 100%;height: 100%;"/>
+                    </div>
+                </div>
+                <div style="width: 100%;">
+                    <div style="width: 100%;">
+                        <label>VAT(%)</label>
+                    </div>
+                    <div style="width: 100%;height: 100%;">
+                        <input name="VAT" type="number" style="width: 100%;height: 100%;"/>
+                    </div>
+                </div>
+                <div style="width: 100%;">
+                    <div style="width: 100%;">
+                        <label>Payment Handling Fee(%):</label>
+                    </div>
+                    <div style="width: 100%; height: 100%;">
+                        <input name="phf" type="number" step='any' style="width: 100%;height: 100%;"/>
+                    </div>
+                </div>
+                
+                
+          
+                <input class="btn btn-primary" type="submit" value="Calculate" style="width: 45%;"/>
+                <input class="btn btn-primary" type="reset" style="width: 45%;"/> 
+                
+              </form>		  
+
+		</div>
+	</div>
+
+	<div class="col-md-7" style="
+    position: relative;
+    left: -7px;
+    color: #f05f6c;
+">
+		<h5>PROFIT-CALCULATION</h5>
+		<hr>
+		<div class="card card-body">
+			<div style="width: 100%;">
+            <div style="width: 100%; text-align: center; position: relative; top: 25px;">
+                <h4>PROFIT CALCULATION</h4>
+                <table>
+                    <tr>
+                    <th class="text-muted" >Commission</th> 
+                    <th>{{Commission}}%</th>
+                     </tr>
+                     <tr>
+                    <th class="text-muted" >Payment Handling Fee(%):</th> 
+                    <th>{{PHF}}%</th>
+                        </tr>
+                        <tr>
+                    <th class="text-muted" >VAT(%)</th> 
+                    <th>{{VAT}}%</th>
+                        </tr>
+                    <tr>
+                        <tr>
+                        <th class="text-muted" >VAT Shipping Fee</th> 
+                        <th>Rs{{VATS}}</th>
+                            </tr>
+                        <tr>
+                            <th class="text-muted" >VAT on Commission and Payment Handling Fee</th> 
+                            <th>Rs{{VATF}}</th>
+                                </tr>
+                            <tr>
+                        <tr>
+                            <th class="text-muted" >Daraz Expense</th> 
+                            <th>Rs{{DE}}</th>
+                                </tr>
+                        <th class="text-muted" >Total-Charges</th> 
+                        <th>Rs{{TOTAL}}</th>
+                            </tr>
+                            <tr>
+                        <th class="text-muted" >Product Cost/unit</th> 
+                        <th>Rs{{selling_price}}</th>
+                            </tr>
+                            <tr>
+                        
+                        <th class="text-muted" >Profit/unit</th> 
+                        <th>Rs{{PROFIT}}</th>
+                            </tr>
+                    
+                        <tr>
+                        <th class="text-muted" >Revenue/month</th> 
+                        <th>Rs{{Revenue}}</th>
+                            </tr>
+                        <tr>
+                            <th class="text-muted" >Profit/month</th> 
+                            <th>Rs{{PROFITM}}</th>
+                                </tr>
+                        
+                </table>
+            </div>
+            
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}
+
