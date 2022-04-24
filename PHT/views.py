@@ -241,7 +241,7 @@ def dashboard(request):
         obj.save()
         product=UserScrapeData.objects.last()
         try:
-            print(product.id)
+            # print(product.id)
             red="/product/"+str(product.id)
             return redirect(red)
         except Exception as error:
