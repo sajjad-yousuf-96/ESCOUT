@@ -22,4 +22,4 @@ class CommissionList(models.Model):
     commissions=models.CharField(max_length=200,null=True)
 
     def __str__(self):
-        return self.commissions
+        return self.category

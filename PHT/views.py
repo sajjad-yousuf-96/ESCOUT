@@ -354,5 +354,7 @@ def product(request,pk):
     return render(request,'PHT/product.html',context)  
 
 def databasePage(request):
-    
-    return render(request,'PHT/database.html')      
+    products=CommissionList.objects.all()
+    print(products)
+    context={'products':products}
+    return render(request,'PHT/databasemain.html',context)
