@@ -46,62 +46,7 @@ def loginPage(request):
 
 		context = {}
 		return render(request, 'PHT/login.html', context)
-    
-# class daraz(scrapy.Spider):
-#     name = "DARAZ"
-#     # For headless
-#     # option = webdriver.ChromeOptions()
-#     # option.add_argument('headless')
-    
-#     def __init__(self,url,dictt,driver):
-#         self.url=url
-#         self.dictt=dictt
-#         self.driver=driver
 
-#     def start_requests(self):
-#         urls=self.url
-#         yield scrapy.Request(url=urls,callback=self.parse1)
-
-#     def parse1(self,response):
-#         print(response)
-#         urls=self.url
-#         dictt=self.dictt
-#         self.driver.get(response.url)
-#         time.sleep(100)
-#         # fetchData = response.xpath("//ul[contains(@class,'specification-keys')]//div[contains(@class,'key-value')]/text()").extract()
-#         # print("check01: ",fetchData)
-#         response=response.replace(body=self.driver.page_source)
-#         time.sleep(100)
-#         # fetchData = response.xpath("//ul[contains(@class,'specification-keys')]//div[contains(@class,'key-value')]/text()").extract()
-#         # print("check02: ",fetchData)
-
-#         # # SKU, brand Name
-#         # dictt['SKU'] = fetchData[1]
-#         # dictt['brandName'] = fetchData[0]
-
-#         myData = BeautifulSoup(self.driver.page_source,'html.parser')
-#         allData = myData.find_all("script")
-#         mainData = allData[len(allData)-31]
-
-#         mainData=str(mainData)
-#         requiredData = json.loads(mainData[mainData.index("app.run")+8 : mainData.rindex("module_popups")+len("module_popups")+5])
-#         dictt['stock'] = requiredData['data']['root']['fields']['skuInfos']['0']['stockList'][0]['stoock']
-#         dictt['title'] = requiredData['data']['root']['fields']['product']['title']
-#         dictt['avgRating'] = requiredData['data']['root']['fields']['review']['ratings']['average']
-#         dictt['totRating'] = requiredData['data']['root']['fields']['review']['ratings']['rateCount']
-#         dictt['totReview'] = requiredData['data']['root']['fields']['review']['ratings']['reviewCount']
-#         dictt['totQuestions'] = requiredData['data']['root']['fields']['qna']['totalItems']
-#         # seller/store name
-#         dictt['sellName'] = requiredData['data']['root']['fields']['seller']['name']
-#         # chat response rate
-#         dictt['respRate'] = requiredData['data']['root']['fields']['seller']['chatResponsiveRate']['value']
-#         # sale price / original price
-#         if 'originalPrice' in requiredData['data']['root']['fields']['skuInfos']['0']['price']:
-#             dictt['orgPrice'] = requiredData['data']['root']['fields']['skuInfos']['0']['price']['originalPrice']['text']
-#         dictt['salePrice'] = requiredData['data']['root']['fields']['skuInfos']['0']['price']['salePrice']['text']
-
-#         print("total is",dictt)
-        
 def register(request):
     form=CreateUserForm()
 
