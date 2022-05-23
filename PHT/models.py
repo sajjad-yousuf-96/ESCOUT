@@ -35,5 +35,5 @@ class CategoryRecords(models.Model):
     product_price=models.CharField(max_length=200,null=True)
     product_review=models.CharField(max_length=200,null=True)
     product_rating=models.CharField(max_length=200,null=True)
-    category_id=models.ForeignKey(Categories,null=True,on_delete=models.CASCADE)
-
+    # category_id=models.ForeignKey(Categories,null=True,on_delete=models.CASCADE)
+    category_name=models.CharField(max_length=200,null=True)
