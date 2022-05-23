@@ -299,7 +299,8 @@ def product(request,pk):
     return render(request,'PHT/product.html',context)  
 
 def databasePage(request):
-    products=CommissionList.objects.all()
+    # products=CommissionList.objects.all()
+    products= CategoryRecords.objects.all()
     print(products)
     context={'products':products}
-    return render(request,'PHT/databasemain.html',context)
+    return render(request,'PHT/database.html',context)
