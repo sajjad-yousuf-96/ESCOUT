@@ -304,3 +304,12 @@ def databasePage(request):
     print(products)
     context={'products':products}
     return render(request,'PHT/database.html',context)
+
+
+@login_required(login_url='login')
+def darazCommission(request):
+    allData = CommissionList.objects.all()
+    if(request.method=="POST"):
+        keyword=request.POST.get('category')
+        allData=CommissionList.objects.filter(category__icontains=keyword) 
+    return render(request,'PHT/commissionPage.html',{'allData' : allData})

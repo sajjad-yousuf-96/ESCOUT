@@ -6,35 +6,40 @@
 
 <br>
 <style>
-	.btn-primary{
-      color: #080103;
-      background-color: #f05f6c;
-      font-size: large;
-      border-color: #f05f6c;
-    }
-  .btn-primary:hover{
-    background-color: #080103;
-    font-size: bold;
-    color: #f05f6c;
-  }
-  .btn-primhassan{
-      color: #F63854;
-      position:relative;
-	  left: 5px; 
-      top:2px;
-	  border-color: violet;
-	  
-    }
-  .btn-primhassan:hover{
-    background-color: #F63854;
-    color: white;
-    font-size: bold;
-  }
-  .btn-primhassan:active,
-  .btn-primhassan:visited,
-  .btn-primhassan:focus {
-      border-color: #F63854;
-}
+	.btn-primary {
+		color: #080103;
+		background-color: #f05f6c;
+		font-size: large;
+		border-color: #f05f6c;
+	}
+
+	.btn-primary:hover {
+		background-color: #080103;
+		font-size: bold;
+		color: #f05f6c;
+	}
+
+	.btn-primhassan {
+		color: #F63854;
+		position: relative;
+		left: 5px;
+		top: 2px;
+		border-color: violet;
+
+	}
+
+	.btn-primhassan:hover {
+		background-color: #F63854;
+		color: white;
+		font-size: bold;
+	}
+
+	.btn-primhassan:active,
+	.btn-primhassan:visited,
+	.btn-primhassan:focus {
+		border-color: #F63854;
+	}
+
 	table,
 	td {
 		color: #f05f6c;
@@ -57,32 +62,33 @@
 		<!-- <input class="btn login_btn"  value="Login"> -->
 		{% csrf_token %}
 		<div class="input-group mb-3">
-		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="URLS" value="URLS">
-			<label class="form-check-label" for="URLS">
-			  URLS
-			</label>
-		  </div>
-		  <div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="URLS" value="SKU">
-			<label class="form-check-label" for="SKU">
-			  SKU
-			</label>
-		  </div>
-		<input class="btn btn-primary  btn-sm btn-block" type="submit" value="Add-Product">
-		
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="radio" name="URLS" value="URLS">
+				<label class="form-check-label" for="URLS">
+					URLS
+				</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="radio" name="URLS" value="SKU">
+				<label class="form-check-label" for="SKU">
+					SKU
+				</label>
+			</div>
+			<input class="btn btn-primary  btn-sm btn-block" type="submit" value="Add-Product">
+
 			<div class="input-group-append">
 				<span class="input-group-text"><i class="fas fa-external-link-alt"></i></span>
 			</div>
-	
-			<input type="text" name="urls" placeholder="Enter Url of Daraz of Product OR SKU-NUMBER of Product..." class="form-control" value="{{urls}}">
-			
+
+			<input type="text" name="urls" placeholder="Enter Url of Daraz of Product OR SKU-NUMBER of Product..."
+				class="form-control" value="{{urls}}">
+
 		</div>
-		
-		</form>
-	  </div>
+
+	</form>
+</div>
 <div class="row">
-			
+
 	<div class="col-md-5" style="position: relative;left: 11px;">
 		<h5 style="position: relative; 
         color: #f05f6c;
@@ -93,7 +99,8 @@
 			<div>
 				<div>
 					{% for data in datas %}
-						<h6>{{data.item_name}}<a class="btn btn-primhassan"  href="{% url 'product' data.id  %}">View</a></h6>
+					<h6>{{data.item_name}}<a class="btn btn-primhassan" href="{% url 'product' data.id  %}">View</a>
+					</h6>
 					{% endfor %}
 				</div>
 			</div>
@@ -147,8 +154,7 @@
 			<!-- RGIHT SIDE DIV -->
 			<div class="row p-2">
 
-				<div
-				class="col-12 col-md-5" style="border: 2px solid #b5b1b1;border-radius:3px">
+				<div class="col-12 col-md-5" style="border: 2px solid #b5b1b1;border-radius:3px">
 					<div>
 						<h6 style="color: #f05f6c;">Avg Price
 						</h6>
@@ -167,8 +173,7 @@
 					</div>
 				</div>
 				<div class="col-2"></div>
-				<div
-				class="col-12 col-md-5" style="border: 2px solid #b5b1b1;border-radius:3px">
+				<div class="col-12 col-md-5" style="border: 2px solid #b5b1b1;border-radius:3px">
 					<div>
 						<h6 style="color: #f05f6c;">Avg Charges
 						</h6>
