@@ -51,11 +51,11 @@
             {% for product in products %}
                 <div class="card" style="width: 15rem;height: fit-content;">
                     <div class="card-body">
-                        <h5 class="card-title">{{product.category_name}}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{product.product_price}}</h6>
-                        <h6 class="card-subtitle mb-2 text-muted">{{product.product_rating}}</h6>
-                        <h6 class="card-subtitle mb-2 text-muted">{{product.product_review}}</h6>
-                        <p class="card-text">{{product.product_title}}</p>
+                        <h5 class="card-title">Category: {{product.category_name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Price:  {{product.product_price}}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">Rating: {{product.product_rating}}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">Review: {{product.product_review}}</h6>
+                        <p class="card-text">Title: {{product.product_title}}</p>
                         <!-- <a href="#" class="card-link">Card link</a> -->
                         <a href="{{product.product_url}}" class="card-link">Product URL</a>
                     </div>
