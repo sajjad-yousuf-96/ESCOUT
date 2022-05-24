@@ -1,0 +1,121 @@
+{% extends 'PHT/main.html' %}
+{% load static %}
+{% block content %}
+
+<!-- styling -->
+<style>
+    .main {
+        padding: 20px 120px;
+    }
+
+    th,
+    td {
+        text-align: left;
+    }
+
+    form {
+        padding-top: 10px;
+    }
+
+    .divider {
+        border-style: solid;
+        border-left-width: 8px;
+        border-left-color: #F63854;
+        margin-top: 5px;
+        padding: 15px 40px;
+        font-weight: bold;
+        font-size: large;
+        background-color: #ebedee53;
+        /* margin-right: 20px; */
+
+        /* margin: 0px 0px 0px 2px;
+        background-color: white; */
+    }
+
+    .main_divide {
+
+        background-color: blue;
+    }
+</style>
+<div style="display: flex; justify-content: space-between">
+    <div style="display: flex;justify-content:start;padding: 10px 10px;">
+        <img width="60px" src="{% static 'images/flag.png' %}" alt="asas">
+        <h1 style="padding-left: 5px;">Daraz Pakistan</h1>
+
+    </div>
+    <!-- <div style="display: flex;">
+        <p class="divider" style="border-right-color: #F63854;">VAT</p>
+        <p class="divider" style="margin-right: 80px;">Payment Handling fee</p>
+    </div> -->
+
+
+</div>
+
+
+<!-- <div style="display: flex;">
+
+    <div class="main_divide">
+        <p class="divider">VAT</p>
+    </div>
+    <div class="main_divide">
+        <p class="divider">Handling Fee</p>
+    </div>
+</div> -->
+<!-- <h1 style="padding-left: 10px;"><img width="50px" src="{% static 'images/flag.png' %}" alt="asas"> Daraz Pakistan</h1> -->
+<h3 style="opacity: 0.7; padding-left: 20px;">Commissions and Charges List</h3>
+
+<!-- search bar -->
+<form method="POST">
+    {% csrf_token %}
+    <div class="col-auto">
+        <!-- <label class="sr-only" for="inlineFormInputGroup">Username</label> -->
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text"><i class="fas fa-search"></i></div>
+            </div>
+            <input type="text" name="Keyword" class="form-control" id="inlineFormInputGroup"
+                placeholder="Enter Keyword" required>
+            <input type="text" name="howmany" class="form-control" id="inlineFormInputGroup"
+                placeholder=" < 10" required>
+            <input type="submit" name="submit" class="form-control" value="Search" 
+            style="color: white;background: #f05f6c;" required>
+        </div>
+    </div>
+
+
+</form>
+
+<div class="main">
+    {% for data in datas %} 
+            <!-- <h6>{{data.product_title}}</h6> -->
+        <table class="table" style="border-style: groove;">
+            <thead style="background-color: #f3f3f3;">
+                <tr>
+                    <th colspan="3">Title</th>
+                    <td colspan="3">{{data.product_title}}</td>
+                </tr>
+                <tr>
+                    <th>Search Keyword</th>
+                    <td>{{data.search_name}}</td>
+                    <th>SKU</th>
+                    <td>{{data.product_sku}}</td>
+                    <th>Stock</th>
+                    <td>{{data.stock}}</td>
+                    
+                </tr>
+                <tr>
+                    <th>Price</th>
+                    <td>{{data.item_price}}</td>
+                    <th>Reviews</th>
+                    <td>{{data.review}}</td>
+                    <th>Ratings</th>
+                    <td>{{data.ratings}}</td>
+                </tr>
+                {% endfor %}
+            </thead>
+        </table>
+</div>
+
+
+
+{% endblock %}
