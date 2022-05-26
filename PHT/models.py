@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 
 # Create your models here.
@@ -13,7 +14,8 @@ class UserScrapeData(models.Model):
     item_price=models.CharField(max_length=200,null=True)
     brand=models.CharField(max_length=200,null=True)
     review=models.CharField(max_length=200,null=True)
-    done=models.BooleanField(null=True,default=False)
+    time=models.CharField(max_length=200,null=True)
+    date=models.CharField(max_length=200,null=True)
 
     def __str__(self):
         return self.item_name
@@ -53,3 +55,22 @@ class CompetitorData(models.Model):
 
     def __str__(self):
         return self.product_title
+    
+class UserProductsTracking(models.Model):
+    userid=models.CharField(max_length=200,null=True)
+    sku=models.CharField(max_length=200,null=True)
+    stock=models.CharField(max_length=200,null=True)
+    # date_created=models.CharField(auto_now_add=True,null=True)
+    ratings=models.CharField(max_length=200,null=True)
+    item_name=models.CharField(max_length=200,null=True)
+    shop_name=models.CharField(max_length=200,null=True)
+    item_price=models.CharField(max_length=200,null=True)
+    brand=models.CharField(max_length=200,null=True)
+    review=models.CharField(max_length=200,null=True)
+    product_id=models.CharField(max_length=200,null=True)
+    time=models.CharField(max_length=200,null=True)
+    date=models.CharField(max_length=200,null=True)
+
+    def __str__(self):
+        return self.sku
+    

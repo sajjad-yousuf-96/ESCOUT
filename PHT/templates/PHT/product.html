@@ -47,59 +47,56 @@
 ">
     
     <div>
-     
+      {% for product in products|slice:":1" %}
         <h6>{{product.item_name}}
         </h6>
+      {% endfor %}
         <div class="input-group mb-3">
-          <div style="width: 10%;height: 100%;">
-            <h5>Schedular</h5><select name="category" id="category" style="width:120%;height: 100%;">
-              <option value="" selected disabled hidden>Choose Duration</option>
-              <option value="1">1-hour</option>
-              <option value="2">2-hour</option>
-              <option value="3">3-hour</option>
-              <option value="4">4-hour</option>
-              <option value="5">5-hour</option>
-          </select>
-          <a class="btn btn-primhassan"  href="#">Go</a>
-            
+          <div style="width: 100%;height: 100%;">
+            <h5>Schedular</h5>
+            <form method="post">
+              {% csrf_token %}
+                <label>Enter in Minutes: </label><input name="minutes" type="number"/>
+                <input class="btn btn-primhassan"  type='submit' value='Go'>
+            </form>
         </div>
       </div>
-      
-      <table>
-        <tr>
-          <th>SKU</th>
-          <td>{{product.sku}}</td>
-          <th>Revenue</th>
-          <td>468000</td>
-        </tr>
-        <tr>
-          <th>Company</th>
-          <td>{{product.shop_name}}</td>
-          <th>Sales</th>
-          <td>13-14</td>
-        </tr>
-        <tr>
-          <th>Brand</th>
-          <td>{{product.brand}}</td>
-          <th>Price</th>
-          <td>{{product.item_price}}</td>
-        </tr>
-        <tr>
-          <th>Seller</th>
-          <td>{{product.shop_name}}</td>
-          <th>Review</th>
-          <td>{{product.review}}</td>
-        </tr>
-        
-        <tr>
-          <th>Ratings</th>
-          <td>{{product.ratings}}</td>
-          <th>Ranking(1-10)</th>
-          <td>5</td>
-        </tr>
-        
-        
-      </table>
+      {% for product in products %}
+        <table>
+          <tr>
+            <th>SKU</th>
+            <td>{{product.sku}}</td>
+            <th>Stock</th>
+            <td>{{product.stock}}</td>
+          </tr>
+          <tr>
+            <th>Company</th>
+            <td>{{product.shop_name}}</td>
+            <th>Ratings</th>
+            <td>{{product.ratings}}</td>
+          </tr>
+          <tr>
+            <th>Brand</th>
+            <td>{{product.brand}}</td>
+            <th>Price</th>
+            <td>{{product.item_price}}</td>
+          </tr>
+          <tr>
+            <th>Seller</th>
+            <td>{{product.shop_name}}</td>
+            <th>Review</th>
+            <td>{{product.review}}</td>
+          </tr>
+          
+          <tr>
+            <th>Time of Data</th>
+            <td>{{product.time}}</td>
+            <th>Date of Data</th>
+            <td>{{product.date}}</td>
+          </tr>
+          <br>
+        </table>
+      {% endfor %}
     </div>
 
 

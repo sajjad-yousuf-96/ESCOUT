@@ -1,10 +1,14 @@
+from pydoc import text
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from selenium import webdriver
 from selenium import webdriver
+from django.db.models import Q
+import datetime
 # import scrapy
 from webdriver_manager.chrome import ChromeDriverManager
 from .competitor import main
+from .scrapedata import scrapedata,timestamp
 import re
 from selenium import webdriver
 import time
@@ -100,7 +104,8 @@ def dashboard(request):
         read=str(p) #Needed to do as the file encoding is undefined
         # cap=""
         a=re.findall("ratings.:..average.:...",read)
-        ratings=a[0][20::]
+        ratings=driver.find_element_by_xpath('/html/body/div[4]/div/div[9]/div[1]/div[2]/div/div/div/div[1]/div[2]/div/div/div[1]/div[3]').text
+        print(ratings)
         skudata=re.findall("SKU.:........................",read)
         # stockdata=re.findall("stoock.:....",read)
         for i in skudata:
@@ -120,15 +125,22 @@ def dashboard(request):
         print("Review ",review)
         print("Brand ",brand)
         userid=request.user.id
-        obj=UserScrapeData.objects.create(userid=userid,sku=skud,stock=stock,ratings=ratings,item_name=name,shop_name=shopname,item_price=price,brand=brand,review=review)
+        t=timestamp()
+        print(t)
+        # times=datetime.datetime.now()
+        # times=times.strftime("%H:%M:%S")
+        # dates=datetime.date.today()
+        # print(times)
+        # print(dates)
+        obj=UserScrapeData.objects.create(userid=userid,sku=skud,stock=stock,ratings=ratings,item_name=name,shop_name=shopname,item_price=price,brand=brand,review=review,time=t[0],date=t[1])
         obj.save()
-        product=UserScrapeData.objects.last()
-        try:
-            print(product.id)
-            red="/product/"+str(product.id)
-            return redirect(red)
-        except Exception as error:
-            return render(request,"PHT/dashboard.html")
+        # product=UserScrapeData.objects.last()
+        # try:
+        #     print(product.id)
+        #     red="/product/"+str(product.id)
+        #     return redirect(red)
+        # except Exception as error:
+        #     return render(request,"PHT/dashboard.html")
     elif request.method=="POST" and request.POST.get('URLS')=='SKU':
         url = str('https://www.daraz.pk/catalog/?q=')
         skus=request.POST.get('urls')
@@ -163,8 +175,9 @@ def dashboard(request):
         
         read=str(p) #Needed to do as the file encoding is undefined
         # cap=""
-        a=re.findall("ratings.:..average.:...",read)
-        ratings=a[0][20::]
+        # a=re.findall("ratings.:..average.:...",read)
+        ratings=driver.find_element_by_xpath('/html/body/div[4]/div/div[9]/div[1]/div[2]/div/div/div/div[1]/div[2]/div/div/div[1]/div[3]').text
+        print(ratings)
         skudata=re.findall("SKU.:........................",read)
         # stockdata=re.findall("stoock.:....",read)
         for i in skudata:
@@ -184,15 +197,22 @@ def dashboard(request):
         print("Review ",review)
         print("Brand ",brand)
         userid=request.user.id
-        obj=UserScrapeData.objects.create(userid=userid,sku=skud,stock=stock,ratings=ratings,item_name=name,shop_name=shopname,item_price=price,brand=brand,review=review)
+        t=timestamp()
+
+        # times=datetime.datetime.now()
+        # times=times.strftime("%H:%M:%S")
+        # dates=datetime.date.today()
+        # print(times)
+        # print(dates)
+        obj=UserScrapeData.objects.create(userid=userid,sku=skud,stock=stock,ratings=ratings,item_name=name,shop_name=shopname,item_price=price,brand=brand,review=review,time=t[0],date=t[1])
         obj.save()
-        product=UserScrapeData.objects.last()
-        try:
-            # print(product.id)
-            red="/product/"+str(product.id)
-            return redirect(red)
-        except Exception as error:
-            return render(request,"PHT/dashboard.html")
+        # product=UserScrapeData.objects.last()
+        # try:
+        #     # print(product.id)
+        #     red="/product/"+str(product.id)
+        #     return redirect(red)
+        # except Exception as error:
+        #     return render(request,"PHT/dashboard.html")
 
 
     # if request.method=="POST":
@@ -292,13 +312,52 @@ def index(request):
     return render(request,'PHT/index.html')
 @login_required(login_url='login')
 def product(request,pk):
-    # print(request.user.id)
-    # userid=request.user.id
-    # pid=pk
-    product=UserScrapeData.objects.get(id=pk)
-    print(product)
-    context={'product':product}
-    return render(request,'PHT/product.html',context)  
+    if request.method == 'POST':
+        print(request.POST)
+        print(pk)
+        pk_id=pk
+        print(request.user.id)
+        userid=request.user.id
+        data=UserScrapeData.objects.get(id=pk)
+        # times=datetime.datetime.now()
+        # times=times.strftime("%H:%M:%S")
+        # dates=datetime.date.today()
+        print("s",data)
+        obj=UserProductsTracking.objects.create(userid=userid,sku=data.sku,stock=data.stock,ratings=data.ratings,item_name=data.item_name,shop_name=data.shop_name,item_price=data.item_price,brand=data.brand,review=data.review,time=data.time,date=data.date,product_id=pk_id)
+        obj.save()
+        d=scrapedata(data.sku)
+        print(d[1])
+        times=datetime.datetime.now()
+        times=times.strftime("%H:%M:%S")
+        dates=datetime.date.today()
+        obj=UserProductsTracking.objects.create(userid=userid,sku=d[1],stock=d[0],ratings=d[2],item_name=d[3],shop_name=d[5],item_price=d[4],brand=d[6],review=d[7],time=times,date=dates,product_id=pk_id)
+        obj.save()
+    
+    userid=request.user.id
+    pid=pk
+    products=UserScrapeData.objects.get(id=pk)
+    # print(products.sku)
+    # skus=products.sku
+    if UserProductsTracking.objects.filter(Q(sku=products.sku) & Q(product_id=products.id)):
+        products=UserProductsTracking.objects.filter(Q(sku=products.sku) & Q(product_id=products.id))
+        print("sa",products)
+        context={'products':products}
+        return render(request,'PHT/product.html',context)
+    else:
+        products=UserScrapeData.objects.filter(id=pk)
+        print("s",products) 
+        context={'products':products}
+        return render(request,'PHT/product.html',context) 
+    # try:
+    #     products=UserProductsTracking.objects.filter(Q(sku=products.sku) & Q(product_id=products.id))
+    #     print("sa",products)
+    #     context={'products':products}
+    #     return render(request,'PHT/product.html',context)
+    # except:
+    #     products=UserScrapeData.objects.filter(id=pk)
+    #     print("s",products.sku) 
+    #     context={'products':products}
+    # return render(request,'PHT/product.html')  
 
 def databasePage(request):
     # products=CommissionList.objects.all()
@@ -329,14 +388,15 @@ def datacompetitor(request):
         userid=request.user.id
         
         try:
-            for i in data:
+            for urls in data:
                 options=Options()
                 options.headless=False
                 # chrome='E:/DJ/NEWESCOUT/ESCOUT/chromedriver.exe'
                 driver = webdriver.Chrome(ChromeDriverManager().install())
+                print(urls)
                 # driver = webdriver.Chrome('E:/DJ/NEWESCOUT/ESCOUT/chromedriver.exe',chrome_options=options)
                 # url="view-source:"+urlss
-                driver.get(i)
+                driver.get(urls)
                 time.sleep(15)
                 # driver.find_element_by_xpath('//*[@id="root"]/div/div[2]/div[1]/div/div[1]/div[2]/div/div/div').click()
                 driver.execute_script("window.scrollTo(0, 1350)")
@@ -360,8 +420,9 @@ def datacompetitor(request):
                 
                 read=str(p) #Needed to do as the file encoding is undefined
                 # cap=""
-                a=re.findall("ratings.:..average.:...",read)
-                ratings=a[0][20::]
+                # a=re.findall("ratings.:..average.:...",read)
+                ratings=driver.find_element_by_xpath('/html/body/div[4]/div/div[9]/div[1]/div[2]/div/div/div/div[1]/div[2]/div/div/div[1]/div[3]').text
+                print(ratings)
                 skudata=re.findall("SKU.:........................",read)
                 # stockdata=re.findall("stoock.:....",read)
                 for i in skudata:
@@ -374,7 +435,7 @@ def datacompetitor(request):
                     stock=i.group(1)
                     print(i.group(1))
                     break
-                obj=CompetitorData.objects.create(search_name=keyword,userid=userid,product_url=i,product_title=name,item_price=price,review=review,product_sku=skud,stock=stock,ratings=ratings)
+                obj=CompetitorData.objects.create(search_name=keyword,userid=userid,product_url=urls,product_title=name,item_price=price,review=review,product_sku=skud,stock=stock,ratings=ratings)
                 obj.save()
             
         except Exception as error:
