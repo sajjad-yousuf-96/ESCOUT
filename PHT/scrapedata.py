@@ -65,6 +65,6 @@ def timestamp():
     times=datetime.datetime.now()
     times=times.strftime("%H:%M:%S")
     da=datetime.date.today()
-    print(times,da)
+    # print(times,da)
     return times,da
-timestamp()
+# timestamp()

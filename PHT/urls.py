@@ -11,5 +11,6 @@ urlpatterns=[
     path('login/',views.loginPage,name='login'),
     path('logout/',views.logoutP,name='logout'),
     path('commission/',views.darazCommission,name='daraz_commission'),
+    path('productcalculator/',views.productcalculator,name='productcalculator'),
     path('datacompetitor/',views.datacompetitor,name='datacompetitor')
 ]

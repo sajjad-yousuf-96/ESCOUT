@@ -312,10 +312,13 @@ def index(request):
     return render(request,'PHT/index.html')
 @login_required(login_url='login')
 def product(request,pk):
-    if request.method == 'POST':
+    if request.method == 'POST' and request.POST.get('Schedular'):
         print(request.POST)
         print(pk)
         pk_id=pk
+        seconds=request.POST.get('seconds')
+        seconds=int(seconds)
+        print(type(seconds))
         print(request.user.id)
         userid=request.user.id
         data=UserScrapeData.objects.get(id=pk)
@@ -325,6 +328,8 @@ def product(request,pk):
         print("s",data)
         obj=UserProductsTracking.objects.create(userid=userid,sku=data.sku,stock=data.stock,ratings=data.ratings,item_name=data.item_name,shop_name=data.shop_name,item_price=data.item_price,brand=data.brand,review=data.review,time=data.time,date=data.date,product_id=pk_id)
         obj.save()
+        print("WAit",seconds,"Seconds")
+        time.sleep(seconds)
         d=scrapedata(data.sku)
         print(d[1])
         times=datetime.datetime.now()
@@ -332,7 +337,32 @@ def product(request,pk):
         dates=datetime.date.today()
         obj=UserProductsTracking.objects.create(userid=userid,sku=d[1],stock=d[0],ratings=d[2],item_name=d[3],shop_name=d[5],item_price=d[4],brand=d[6],review=d[7],time=times,date=dates,product_id=pk_id)
         obj.save()
-    
+    elif request.method == 'POST' and request.POST.get('Profit'):
+        print(request.POST)
+        print(pk)
+        data=UserScrapeData.objects.get(id=pk)
+        print(data)
+        price=data.item_price
+        price=price.replace("Rs. ","")
+        try:
+            price=price.replace(",","")
+            price=int(price)
+            sourcing=int(price/4)
+            cate=CommissionList.objects.all()
+            # print(cate)
+            # context={'cate':cate}
+            # return render(request,"PHT/profit.html",context)
+            context={'price':price,'sourcing':sourcing,'cate':cate}
+            return render(request,'PHT/productcalculator.html',context) 
+        except:
+            price=int(price)
+            sourcing=int(price/4)
+            cate=CommissionList.objects.all()
+            # print(cate)
+            # context={'cate':cate}
+            # return render(request,"PHT/profit.html",context)
+            context={'price':price,'sourcing':sourcing,'cate':cate}
+            return render(request,'PHT/productcalculator.html',context) 
     userid=request.user.id
     pid=pk
     products=UserScrapeData.objects.get(id=pk)
@@ -445,3 +475,43 @@ def datacompetitor(request):
     # print(datas)
     context={'datas':datas}
     return render(request,'PHT/competitorpage.html',context)
+
+def productcalculator(request):
+    if request.method=="POST":
+        new=request.POST.dict()
+        lst=list(new.items())
+        phf=float(lst[7][1])
+        vat=int(lst[6][1])
+        selling_price=int(lst[2][1])
+        cat=request.POST.get("category")
+        cate=CommissionList.objects.get(category=cat)
+        # print(cate.commissions)
+        category=cate.commissions
+        category=category.strip("%")
+        category=float(category)
+        # print(type(category))
+        dc=selling_price*(category/100) ### DARAZ COMMISSION
+        print("daraz COMMISSION fee",dc)
+        paymentfee=(selling_price*phf)/100 #payment handling fee 1.25% of sell Price
+        print("PAY handling fee",paymentfee)
+        vats=int(lst[3][1])*vat/100
+        vatf=dc+paymentfee*vat/100
+        print("VAT on Daraz Commission and Payment Fee (16%)",vatf)
+        print("VAT on Shipping FEE (16%)",vats)
+        daraz_comm_total=dc+paymentfee+vatf+vat+10
+        print("Sub Total Daraz Expenses/ Commissions ",daraz_comm_total)
+        total_expense=daraz_comm_total+int(lst[4][1])
+        print("TOTAL EXPENSES (Sourcing Cost + Daraz Fees)",total_expense)
+        net_profit=(selling_price-total_expense)
+        print("Net Profit (Per Product/ Unit) ",net_profit)
+        monthprofi=round(net_profit*int(lst[5][1]))
+        Revenue=selling_price*int(lst[5][1])
+        print("Total Expected profit in a Month",monthprofi)
+        cate=CommissionList.objects.all()
+
+
+        context={'cate':cate,'Commission':category,'PHF':phf,'VAT':vat,'VATS':vats,
+                'VATF':vatf,'DE':daraz_comm_total,'TOTAL':total_expense,
+                'selling_price':selling_price,'PROFIT':net_profit,
+                'Revenue':Revenue,'PROFITM':monthprofi}
+        return render(request,"PHT/productcalculator.html",context)

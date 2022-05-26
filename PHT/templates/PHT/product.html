@@ -56,8 +56,9 @@
             <h5>Schedular</h5>
             <form method="post">
               {% csrf_token %}
-                <label>Enter in Minutes: </label><input name="minutes" type="number"/>
-                <input class="btn btn-primhassan"  type='submit' value='Go'>
+                <label>Enter in Seconds: </label><input name="seconds" type="number"/>
+                <input class="btn btn-primhassan" name="Schedular" type='submit' value='Go'>
+                <input class="btn btn-primhassan" name="Profit" type='submit' value='Profit Calculator'>
             </form>
         </div>
       </div>
