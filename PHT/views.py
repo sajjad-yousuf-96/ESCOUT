@@ -79,7 +79,7 @@ def dashboard(request):
         options=Options()
         options.headless=True
         # chrome='E:/DJ/NEWESCOUT/ESCOUT/chromedriver.exe'
-        driver = webdriver.Chrome('/home/msy/WORK/NEWESCOUT/ESCOUT/chromedriver',chrome_options=options)
+        driver = webdriver.Chrome(ChromeDriverManager().install())
         # driver = webdriver.Chrome('E:/DJ/NEWESCOUT/ESCOUT/chromedriver.exe',chrome_options=options)
         # url="view-source:"+urlss
         driver.get(urlss)
@@ -148,7 +148,7 @@ def dashboard(request):
         options=Options()
         options.headless=True
         # chrome='E:/DJ/NEWESCOUT/ESCOUT/chromedriver.exe'
-        driver = webdriver.Chrome('/home/msy/WORK/NEWESCOUT/ESCOUT/chromedriver',chrome_options=options)
+        driver = webdriver.Chrome(ChromeDriverManager().install())
         # driver = webdriver.Chrome('E:/DJ/NEWESCOUT/ESCOUT/chromedriver.exe',chrome_options=options)
         # url="view-source:"+urlss
         driver.get(urlss)
