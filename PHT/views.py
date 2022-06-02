@@ -590,4 +590,5 @@ def keywordtracking(request):
             obj=CompetitorData.objects.create(search_name=keyword,userid=userid,product_url=urls,product_title=name,item_price=price,review=review,product_sku=skud,stock=stock,ratings=ratings)
             obj.save()
 
+
         return redirect("datacompetitor")
