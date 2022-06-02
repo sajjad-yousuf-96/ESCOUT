@@ -54,7 +54,7 @@ class CompetitorData(models.Model):
     review=models.CharField(max_length=200,null=True)
 
     def __str__(self):
-        return self.product_title
+        return self.product_sku
     
 class UserProductsTracking(models.Model):
     userid=models.CharField(max_length=200,null=True)

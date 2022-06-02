@@ -1,6 +1,6 @@
 from pydoc import text
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 from selenium import webdriver
 from selenium import webdriver
 from django.db.models import Q
@@ -471,9 +471,17 @@ def datacompetitor(request):
         except Exception as error:
             print(error)
     userid=request.user.id
-    datas=CompetitorData.objects.filter(userid=userid)  
+    datas=CompetitorData.objects.filter(userid=userid).order_by('search_name')  
     # print(datas)
-    context={'datas':datas}
+    cate=CompetitorData.objects.filter(userid=userid)
+    keywordlst=[]
+    for i in cate:
+        if i.search_name not in keywordlst:
+            keywordlst.append(i.search_name)
+    
+    # context={'cate':cate}
+    # return render(request,"PHT/profit.html",context)
+    context={'datas':datas,"keywordlst":keywordlst}
     return render(request,'PHT/competitorpage.html',context)
 
 def productcalculator(request):
@@ -515,3 +523,71 @@ def productcalculator(request):
                 'selling_price':selling_price,'PROFIT':net_profit,
                 'Revenue':Revenue,'PROFITM':monthprofi}
         return render(request,"PHT/productcalculator.html",context)
+
+
+def keywordtracking(request):
+    if request.method=="POST":
+        userid=request.user.id
+        print(request.POST)
+        keyword=request.POST['keyword']
+        select_sku=CompetitorData.objects.filter(Q(userid=userid) & Q(search_name=keyword))
+        for i in select_sku:
+            url = str('https://www.daraz.pk/catalog/?q=')
+            urlss=url+i.product_sku
+            options=Options()
+            options.headless=True
+            # chrome='E:/DJ/NEWESCOUT/ESCOUT/chromedriver.exe'
+            driver = webdriver.Chrome(ChromeDriverManager().install())
+            # driver = webdriver.Chrome('E:/DJ/NEWESCOUT/ESCOUT/chromedriver.exe',chrome_options=options)
+            # url="view-source:"+urlss
+            driver.get(urlss)
+            time.sleep(15)
+            driver.find_element_by_xpath('//*[@id="root"]/div/div[2]/div[1]/div/div[1]/div[2]/div/div/div').click()
+            driver.execute_script("window.scrollTo(0, 1350)")
+            driver.execute_script("window.scrollTo(0, 1250)")
+            driver.execute_script("window.scrollTo(0, 1150)")
+            driver.execute_script("window.scrollTo(0, 1050)")
+            driver.execute_script("window.scrollTo(0, 1050)")
+            time.sleep(20)
+            driver.execute_script("window.scrollTo(0, 1150)")
+            driver.execute_script("window.scrollTo(0, 1250)")
+            # a=driver.find_element_by_xpath('/html/body/div[4]/div/div[8]/div[1]/div[2]/div/div/div/div[1]/div[2]/div/div/div[1]/div[1]').text
+            p = driver.page_source
+            name=driver.find_element_by_xpath('//*[@id="module_product_title_1"]/div/div/span').text
+            price=driver.find_element_by_xpath('//*[@id="module_product_price_1"]/div/div/span').text
+            shopname=driver.find_element_by_xpath('//*[@id="module_seller_info"]/div/div[1]/div[1]/div[2]/a').text
+            review=driver.find_element_by_xpath('/html/body/div[4]/div/div[9]/div[1]/div[2]/div/div/div/div[1]/div[2]/div/div/div[1]/div[1]').text
+            
+            brand=driver.find_element_by_xpath('//*[@id="module_product_brand_1"]/div/a[1]').text
+            review=review.split(" ")
+            review=review[0]
+            urls=driver.current_url
+            read=str(p) #Needed to do as the file encoding is undefined
+            # cap=""
+            # a=re.findall("ratings.:..average.:...",read)
+            ratings=driver.find_element_by_xpath('/html/body/div[4]/div/div[9]/div[1]/div[2]/div/div/div/div[1]/div[2]/div/div/div[1]/div[3]').text
+            print(ratings)
+            skudata=re.findall("SKU.:........................",read)
+            # stockdata=re.findall("stoock.:....",read)
+            for i in skudata:
+                skud=i[6::]
+                print("SKU ",skud)
+                break
+            p=re.compile(r'"stoock":(\w+)')
+            m=p.finditer(read)
+            for i in m:
+                stock=i.group(1)
+                print(i.group(1))
+                break
+            print("RATING ",ratings)
+            print("ITEM-NAME ",name)
+            print("ITEM-PRICE ",price)
+            print("SHOP-NAME ",shopname)
+            print("Review ",review)
+            print("Brand ",brand)
+            # print(stock)
+            userid=request.user.id
+            obj=CompetitorData.objects.create(search_name=keyword,userid=userid,product_url=urls,product_title=name,item_price=price,review=review,product_sku=skud,stock=stock,ratings=ratings)
+            obj.save()
+
+        return redirect("datacompetitor")
