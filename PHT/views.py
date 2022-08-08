@@ -87,6 +87,7 @@ def dashboard(request):
         # driver = webdriver.Chrome('E:/DJ/NEWESCOUT/ESCOUT/chromedriver.exe',chrome_options=options)
         # url="view-source:"+urlss
         driver.get(urlss)
+        driver.maximize_window()
         driver.execute_script("window.scrollTo(0, 1350)")
         driver.execute_script("window.scrollTo(0, 1250)")
         driver.execute_script("window.scrollTo(0, 1150)")
@@ -160,6 +161,7 @@ def dashboard(request):
         driver.get(urlss)
         time.sleep(15)
         driver.find_element_by_xpath('//*[@id="root"]/div/div[2]/div[1]/div/div[1]/div[2]/div/div/div').click()
+        driver.maximize_window()
         driver.execute_script("window.scrollTo(0, 1350)")
         driver.execute_script("window.scrollTo(0, 1250)")
         driver.execute_script("window.scrollTo(0, 1150)")
