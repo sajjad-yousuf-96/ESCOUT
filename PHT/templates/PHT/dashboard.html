@@ -94,6 +94,44 @@
         color: #f05f6c;
     ">PRODUCT TRACKING</h5>
 		<hr>
+		<form method="POST" action="/exporttocsv/" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div>
+				<span class="input-group-text"><h6>Export To CSV</h6><button name="exportcsv" style="
+					position: absolute;
+					right: 27px;
+					width: 6%;
+					color: darkgreen;
+					background-color: springgreen;
+				"type="submit" >
+					<i class="fa fa-file-csv"></i>
+				</button>
+				</span>
+				<span class="input-group-text">
+				<!-- <h6>Import From CSV</h6><button name="importcsv" style="
+					position: absolute;
+					right: 27px;
+					width: 6%;
+					color: darkgreen;
+					background-color: springgreen;
+				"type="file" >
+					<i class="fa fa-file-csv"></i>
+				</button> -->
+				<label class="custom-file-upload">
+					Import From CSV
+					<input  name="SAJJAD" type="file"/>
+					<button name="importcsv" style="
+					position: absolute;
+					right: 27px;
+					width: 6%;
+					color: darkgreen;
+					background-color: springgreen;
+				"type="file" >
+					<i class="fa fa-file-csv"></i>
+				</button>
+				</label>
+				</span>
+			</div>
 		<div class="card card-body" style="position: relative;">
 
 			<div>
@@ -117,79 +155,26 @@
 		<div class="card card-body" style="
 		height: 415px;
 		color: #f05f6c;">
-			<div class="row p-2 ">
-				<div class="col-12 col-md-5" style="border: 2px solid #b5b1b1;border-radius:3px;">
-					<div>
-						<h6 style="color: #f05f6c;">Avg Units Sold</h6>
-					</div>
-					<div>
-						<h3>23-24 /month</h3>
-					</div>
-					<hr>
-					<div>
-						<h6 style="color: #f05f6c;">Avg Revenue</h6>
-					</div>
-					<div>
-						<h3>Rs583,082 /month</h3>
-					</div>
-				</div>
-				<div class="col-2"></div>
-				<div class="col-12 col-md-5" style="border: 2px solid #b5b1b1;border-radius:3px">
-					<div>
-						<h6 style="color: #f05f6c;">Avg Rating</h6>
-					</div>
-					<div>
-						<h3>2.1</h3>
-					</div>
-					<hr>
-					<div>
-						<h6 style="color: #f05f6c;">Avg Reviews</h6>
-					</div>
-					<div>
-						<h3>25</h3>
-					</div>
-				</div>
+		<h5 style="color: #f05f6c;">Tracked Data Average </h5>
+		<table style="width: 100%; height: 100%; font-size: 300%;">
+			<thead>
+				<tbody>
+				<tr class="table100-head">
+					<th class="column1">Avg Price</th>
+					<td class="column2">Rs {{avgpricelst}}</td>
+				</tr>
 
-			</div>
-			<!-- RGIHT SIDE DIV -->
-			<div class="row p-2">
-
-				<div class="col-12 col-md-5" style="border: 2px solid #b5b1b1;border-radius:3px">
-					<div>
-						<h6 style="color: #f05f6c;">Avg Price
-						</h6>
-					</div>
-					<div>
-						<h3>Rs24,812 /unit
-						</h3>
-					</div>
-					<hr>
-					<div>
-						<h6 style="color: #f05f6c;">Avg LQS
-						</h6>
-					</div>
-					<div>
-						<h3>53 /100</h3>
-					</div>
-				</div>
-				<div class="col-2"></div>
-				<div class="col-12 col-md-5" style="border: 2px solid #b5b1b1;border-radius:3px">
-					<div>
-						<h6 style="color: #f05f6c;">Avg Charges
-						</h6>
-					</div>
-					<div>
-						<h3>2.1</h3>
-					</div>
-					<hr>
-					<div>
-						<h6 style="color: #f05f6c;">Profit</h6>
-					</div>
-					<div>
-						<h3>25</h3>
-					</div>
-				</div>
-			</div>
+				<tr>
+					<th>Avg Ratings</th>
+					<td>{{avgratinglst}}</td>
+				</tr>
+				<tr>
+					<th>Avg Review</th>
+					<td>{{avgreviewlst}}/5</td>
+				</tr>
+				</tbody>
+			</thead>
+			
 		</div>
 
 	</div>

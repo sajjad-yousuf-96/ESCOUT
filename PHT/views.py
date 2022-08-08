@@ -5,6 +5,8 @@ from selenium import webdriver
 from selenium import webdriver
 from django.db.models import Q
 import datetime
+import csv
+
 # import scrapy
 from webdriver_manager.chrome import ChromeDriverManager
 from .competitor import main
@@ -70,8 +72,10 @@ def logoutP(request):
 # Create your views here.
 @login_required(login_url='login')
 def dashboard(request):
+    # print(request.POST)
     if request.method=="POST" and request.POST.get('URLS')=='URLS':
         print(request.POST.dict())
+        start = time.time()
         # new=request.POST.dict()
         # new=list(new.items())
         # print(list(new))
@@ -134,6 +138,8 @@ def dashboard(request):
         # print(dates)
         obj=UserScrapeData.objects.create(userid=userid,sku=skud,stock=stock,ratings=ratings,item_name=name,shop_name=shopname,item_price=price,brand=brand,review=review,time=t[0],date=t[1])
         obj.save()
+        end = time.time()
+        print(end-start,"seconds")
         # product=UserScrapeData.objects.last()
         # try:
         #     print(product.id)
@@ -208,59 +214,93 @@ def dashboard(request):
         obj.save()
         # product=UserScrapeData.objects.last()
         # try:
-        #     # print(product.id)
-        #     red="/product/"+str(product.id)
-        #     return redirect(red)
-        # except Exception as error:
-        #     return render(request,"PHT/dashboard.html")
-
-
-    # if request.method=="POST":
-        
-        
-
-
-    #     dictt={}
-    #     driver = webdriver.Chrome("E:/DJ/niazi/chromedriver.exe")
-    #     radio=1
-    #     # user based selection
-    #     # sel = int(input("Please select: \n1. SKU\n2. URL"))
-    #     if radio == 1:
-    #         driver.get("https://www.daraz.pk/#")
-    #         user='220294946_PK-1433739908'
-    #         time.sleep(5)
-    #         driver.find_element_by_id("q").send_keys(user)
-    #         driver.find_element_by_xpath("//div[@class='search-box__search--2fC5']/button[@class='search-box__button--1oH7']").click()
-    #         # element = driver.find_element_by_xpath("//div[@class='search-box__search--2fC5']/button[@class='search-box__button--1oH7']")
-    #         # driver.execute_script("arguments[0].click();", element)
-    #         time.sleep(5)
-    #         driver.find_element_by_xpath("//div[@class='c1_t2i']/div[@class='c2prKC']//a[1]").click()
-    #         time.sleep(20)
-    #         urll=driver.current_url
-    #         print(urll)
-    #     else:
-    #         urll=input("Please Enter the URL: ")
-    #     process = CrawlerProcess()
-    #     process.crawl(daraz,urll,dictt,driver)
-    #     process.start()
 
     userid=request.user.id
     datas=UserScrapeData.objects.filter(userid=userid)  
-    print(datas)
-    context={'datas':datas}
-    return render(request,"PHT/dashboard.html",context)
+    # print(datas)
+    avgpricelst=[]
+    for i in datas:
+        a=i.item_price
+        a=a.replace('Rs. ','')
+        if a.replace(',',''):
+            a=a.replace(',','')
+        # print(a.isdigit())
+        avgpricelst.append(int(a))
+    avgpricelst=sum(avgpricelst)/len(avgpricelst)
+
+    avgreviewlst=[]
+    for i in datas:
+        a=i.review
+        # print(a)
+        if a.replace('/5',''):
+            a=a.replace('/5','')
+        # print(a.isdigit())
+        avgreviewlst.append(float(a))
+    avgreviewlst=sum(avgreviewlst)/len(avgreviewlst)
+
+    avgratinglst=[]
+    for i in datas:
+        a=i.ratings
+        if a.replace(' Ratings',''):
+            a=a.replace(' Ratings','')
+        # print(a.isdigit())
+        avgratinglst.append(int(a))
+    avgratinglst=sum(avgratinglst)/len(avgratinglst)
     
-
-#####################################
-        
-                
-
-
-
-        
-
+    context={'datas':datas,'avgpricelst':avgpricelst,'avgreviewlst':avgreviewlst,'avgratinglst':avgratinglst}
+    return render(request,"PHT/dashboard.html",context)
 
 ########################################
+@login_required(login_url='login')
+def exporttocsv(request):
+    # print(request.POST)
+    if 'exportcsv' in request.POST:
+        userid=request.user.id
+        datas=UserScrapeData.objects.filter(userid=userid)
+        
+        arr = []
+        header=['sku','stock','ratings','item_name','shop_name','item_price','brand','review','time','date']
+
+        for i in datas:
+            newlst=[]
+            newlst.append(i.sku)
+            newlst.append(i.stock)
+            newlst.append(i.ratings)
+            newlst.append(i.item_name)
+            newlst.append(i.shop_name)
+            newlst.append(i.item_price)
+            newlst.append(i.brand)
+            newlst.append(i.review)
+            newlst.append(i.time)
+            newlst.append(i.date)
+            arr.append(newlst)
+        # print(arr)
+            # break
+
+        with open('output.csv','w') as f:
+            writer = csv.writer(f)
+            writer.writerow(header)
+            writer.writerows(arr)
+        print("csv")
+        return redirect("dashboard")
+    else:
+        user=request.user.id
+        # print(request.POST)
+        print(request.FILES['SAJJAD'])
+        a=request.FILES['SAJJAD']
+        new=CsvSaveFile.objects.create(userid=user,csvfile=a)
+        new.save()
+        s=CsvSaveFile.objects.last()
+        # print(s.file.path)
+        paths=s.csvfile.path
+        print(paths)
+        with open(paths, 'r',encoding="latin-1") as file:
+            
+            reader = csv.reader(file)
+            next(reader) # skips the first(header) line
+            for row in reader:
+                print(row)
+        return redirect("dashboard")
 
 @login_required(login_url='login')
 def profitcalculator(request):
@@ -325,18 +365,21 @@ def product(request,pk):
         # times=datetime.datetime.now()
         # times=times.strftime("%H:%M:%S")
         # dates=datetime.date.today()
-        print("s",data)
-        obj=UserProductsTracking.objects.create(userid=userid,sku=data.sku,stock=data.stock,ratings=data.ratings,item_name=data.item_name,shop_name=data.shop_name,item_price=data.item_price,brand=data.brand,review=data.review,time=data.time,date=data.date,product_id=pk_id)
-        obj.save()
-        print("WAit",seconds,"Seconds")
-        time.sleep(seconds)
         d=scrapedata(data.sku)
-        print(d[1])
-        times=datetime.datetime.now()
-        times=times.strftime("%H:%M:%S")
-        dates=datetime.date.today()
-        obj=UserProductsTracking.objects.create(userid=userid,sku=d[1],stock=d[0],ratings=d[2],item_name=d[3],shop_name=d[5],item_price=d[4],brand=d[6],review=d[7],time=times,date=dates,product_id=pk_id)
-        obj.save()
+        if d:
+            print("s",data)
+            obj=UserProductsTracking.objects.create(userid=userid,sku=data.sku,stock=data.stock,ratings=data.ratings,item_name=data.item_name,shop_name=data.shop_name,item_price=data.item_price,brand=data.brand,review=data.review,time=data.time,date=data.date,product_id=pk_id)
+            obj.save()
+            print("WAit",seconds,"Seconds")
+            time.sleep(seconds)
+            print(d[1])
+            times=datetime.datetime.now()
+            times=times.strftime("%H:%M:%S")
+            dates=datetime.date.today()
+            obj=UserProductsTracking.objects.create(userid=userid,sku=d[1],stock=d[0],ratings=d[2],item_name=d[3],shop_name=d[5],item_price=d[4],brand=d[6],review=d[7],time=times,date=dates,product_id=pk_id)
+            obj.save()
+        else:
+            print("error")
     elif request.method == 'POST' and request.POST.get('Profit'):
         print(request.POST)
         print(pk)
@@ -371,23 +414,50 @@ def product(request,pk):
     if UserProductsTracking.objects.filter(Q(sku=products.sku) & Q(product_id=products.id)):
         products=UserProductsTracking.objects.filter(Q(sku=products.sku) & Q(product_id=products.id))
         print("sa",products)
-        context={'products':products}
+        datalst=[]
+        for i in products:
+            datalst.append(int(i.stock))
+        print(datalst)
+        timelst=[]
+        for i in products:
+            timelst.append(str(i.date))
+        print(timelst)
+        price_lst=[]
+        for i in products:
+            if str(i.item_price).replace(',',''):
+                item_price=str(i.item_price).replace(',','')
+                item_price=str(item_price).replace('Rs. ','')
+                price_lst.append(str(item_price))
+            else:
+                item_price=str(i.item_price).replace('Rs. ','')
+                price_lst.append(str(item_price))
+        print(price_lst)
+        context={'products':products,'datalst':datalst,'timelst':timelst,'price_lst':price_lst}
         return render(request,'PHT/product.html',context)
     else:
         products=UserScrapeData.objects.filter(id=pk)
         print("s",products) 
-        context={'products':products}
-        return render(request,'PHT/product.html',context) 
-    # try:
-    #     products=UserProductsTracking.objects.filter(Q(sku=products.sku) & Q(product_id=products.id))
-    #     print("sa",products)
-    #     context={'products':products}
-    #     return render(request,'PHT/product.html',context)
-    # except:
-    #     products=UserScrapeData.objects.filter(id=pk)
-    #     print("s",products.sku) 
-    #     context={'products':products}
-    # return render(request,'PHT/product.html')  
+        datalst=[]
+        for i in products:
+            datalst.append(int(i.stock))
+        print(datalst)
+        timelst=[]
+        for i in products:
+            timelst.append(str(i.date))
+        print(timelst)
+        price_lst=[]
+        for i in products:
+            if str(i.item_price).replace(',',''):
+                item_price=str(i.item_price).replace(',','')
+                item_price=str(item_price).replace('Rs. ','')
+                price_lst.append(str(item_price))
+            else:
+                item_price=str(i.item_price).replace('Rs. ','')
+                price_lst.append(str(item_price))
+        print(price_lst)
+        context={'products':products,'datalst':datalst,'timelst':timelst,'price_lst':price_lst}
+        return render(request,'PHT/product.html',context)
+    
 
 def databasePage(request):
     # products=CommissionList.objects.all()
@@ -413,7 +483,7 @@ def datacompetitor(request):
         how=int(how)
         data=main(keyword)
         # print(data)
-        data=data[0:how]
+        data=data[2:how+2]
         print(data)
         userid=request.user.id
         

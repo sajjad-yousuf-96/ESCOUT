@@ -1,7 +1,9 @@
 {%  extends 'PHT/main.html' %}
-
+{% load static %}
 {% block content %}
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
 <style>
   .btn-primhassan{
       color: #F63854;
@@ -26,7 +28,7 @@
 
 	td,th {
 		position: relative;
-		border: 2px solid black;
+		border: 2px solid rgb(187, 187, 187);
 		width: 550px;
 		font-family: 'Times New Roman', Times, serif;
 	}
@@ -98,10 +100,96 @@
           <br>
         </table>
       {% endfor %}
-    </div>
-
-
-  </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <canvas id="chart"></canvas>
+        </div>
+        <div class="col-sm-4">   
+          <canvas id="chart2"></canvas> 
+        </div>
+        <div class="col-sm-4">   
+          <canvas id="chart3"></canvas> 
+        </div>
+      </div>
 </div>
+</div>
+<script>
+  let ctx = document.getElementById("chart").getContext("2d");
+  let chart = new Chart(ctx, {
+  type: "pie",
+  data: {
+   labels: [{% for vals in timelst %}'{{vals}}',{%  endfor %}],
+  //  labels: ['2022-07-28','2022-08-01'],
+   datasets: [
+    {
+      label: "Stock",
+      backgroundColor: "#F63854",
+      borderColor: "black",
+      
+      data:[{% for val in datalst %}{{val}},{%  endfor %}]
+      // data:[200,22000]
+    }
+   ]
+  },
+  options: {
+   title: {
+    text: "STOCK ON SPECIFIED DATE-DAY",
+    display: true
+   }
+  }
+});
+// BAR Chart
+let ctx2 = document.getElementById("chart2").getContext("2d");
+  let chart2 = new Chart(ctx2, {
+  type: "bar",
+  data: {
+   labels: [{% for vals in timelst %}'{{vals}}',{%  endfor %}],
+  //  labels: ['2022-07-28','2022-08-01'],
+   datasets: [
+    {
+      label: "Stock",
+      backgroundColor: "#F63854",
+      borderColor: "black",
+      
+      data:[{% for val in datalst %}{{val}},{%  endfor %}]
+      // data:[200,22000]
+    }
+   ]
+  },
+  options: {
+   title: {
+    text: "STOCK ON SPECIFIED DATE-DAY",
+    display: true
+   }
+  }
+});
+// line graph
+let ctx3 = document.getElementById("chart3").getContext("2d");
+  let chart3 = new Chart(ctx3, {
+  type: "line",
+  data: {
+   labels: [{% for vals in timelst %}'{{vals}}',{%  endfor %}],
+  //  labels: ['2022-07-28','2022-08-01'],
+   datasets: [
+    {
+      label: "Stock",
+      backgroundColor: "#F63854",
+      borderColor: "black",
+      
+      data:[{% for val in price_lst %}{{val}},{%  endfor %}]
+      // data:[200,22000]
+    }
+   ]
+  },
+  options: {
+   title: {
+    text: "PRICE ON SPECIFIED DATE-DAY",
+    display: true
+   }
+  }
+});
+</script>
 {% endblock %}
+
 

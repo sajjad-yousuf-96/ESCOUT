@@ -74,3 +74,6 @@ class UserProductsTracking(models.Model):
     def __str__(self):
         return self.sku
     
+class CsvSaveFile(models.Model):
+    userid=models.CharField(max_length=200,null=True)
+    csvfile=models.FileField(upload_to='csv_files', max_length=254)
