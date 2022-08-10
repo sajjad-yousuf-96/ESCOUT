@@ -8,22 +8,25 @@ from bs4 import BeautifulSoup
 import json
 
 import datetime
-def scrapedata(sku):
-    url = str('https://www.daraz.pk/catalog/?q=')
-    urls = url + sku
+def scrapedataurl(urls):
+    # url = str('https://www.daraz.pk/catalog/?q=')
+    # urls = url + sku
     # modified-code
     # requesting page to get page source
-    response = requests.get(urls)
-    page_data = BeautifulSoup(response.text,'html.parser')
-    last_script_tag = page_data.find_all('script')[-1]
+    print(urls)
+    # response = requests.get(urls)
+    # page_data = BeautifulSoup(response.text,'html.parser')
+    # # print(page_data)
+    # last_script_tag = page_data.find_all('script')[-1]
+
     # print(last_script_tag)
-    dict_data = json.loads(last_script_tag.text)
-    main_url = dict_data.get('itemListElement')[0].get('url') if dict_data.get('itemListElement') else None
+    # dict_data = json.loads(last_script_tag.text)
+    # main_url = dict_data.get('itemListElement')[0].get('url') if dict_data.get('itemListElement') else None
 
     # print("Hey niazi: ",main_url)
 
     # making main page request
-    response_page_source = requests.get(main_url)
+    response_page_source = requests.get(urls)
     # getting relevant data from page source
     pattern = r"app\.run\((.+)\);"
     page_data = re.search(pattern,response_page_source.text).group(1) if re.search(pattern,response_page_source.text) else None

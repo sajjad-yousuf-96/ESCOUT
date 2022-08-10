@@ -1,13 +1,11 @@
-from webdriver_manager.chrome import ChromeDriverManager
+# from webdriver_manager.chrome import ChromeDriverManager
 # from .competitor import main
-import re
 import re
 import time
 import requests
 from bs4 import BeautifulSoup
 import json
 
-import datetime
 def scrapedata(sku):
     url = str('https://www.daraz.pk/catalog/?q=')
     urls = url + sku
@@ -31,32 +29,25 @@ def scrapedata(sku):
     base_data = main_data.get('data').get('root').get('fields')
     
     store_discount = base_data.get('skuInfos').get('0').get('price').get('discount')
-    price = base_data.get('skuInfos').get('0').get('price').get('originalPrice').get('value')
+    original_price = base_data.get('skuInfos').get('0').get('price').get('originalPrice').get('value')
     sale_price = base_data.get('skuInfos').get('0').get('price').get('salePrice').get('value')
     stock = base_data.get('skuInfos').get('0').get('stock')
-    shopname = base_data.get('seller').get('name')
-    ratings = base_data.get('review').get('ratings').get('average')
+    seller_name = base_data.get('seller').get('name')
+    avg_ratings = base_data.get('review').get('ratings').get('average')
     
     reviews_data = base_data.get('review').get('ratings').get('reviewTitle')
-    review = reviews_data.split(" ")[0] if reviews_data else 0
+    reviews = reviews_data.split(" ")[0] if reviews_data else 0
     
     question_answers = base_data.get('qna').get('summaryTitle')
-    skud = base_data.get('productOption').get('skuBase').get('skus')[0].get('innerSkuId')
-    brand = base_data.get('skuInfos').get('0').get('dataLayer').get('brand_name')
-    name = base_data.get('skuInfos').get('0').get('dataLayer').get('pdt_name')
-    print("RATING ",ratings)
-    print("ITEM-NAME ",name)
-    print("ITEM-PRICE ",price)
-    print("SHOP-NAME ",shopname)
-    print("Review ",review)
-    print("Brand ",brand)
-    print("Brand ",skud)
-    return stock,skud,ratings,name,price,shopname,brand,review
+    sku_id = base_data.get('productOption').get('skuBase').get('skus')[0].get('innerSkuId')
+    brand_name = base_data.get('skuInfos').get('0').get('dataLayer').get('brand_name')
+    product_name = base_data.get('skuInfos').get('0').get('dataLayer').get('pdt_name')
+    # seller_name = base_data.get('skuInfos').get('0').get('dataLayer').get('seller_name')
 
-def timestamp():
-    times=datetime.datetime.now()
-    times=times.strftime("%H:%M:%S")
-    da=datetime.date.today()
-    # print(times,da)
-    return times,da
-# timestamp()
+
+    print("HEY NIAZI: ",store_discount," ",original_price," ",sale_price," ",stock," ",seller_name," ",avg_ratings," ",reviews," ",question_answers," ",sku_id," ",brand_name," ",product_name," ",seller_name)
+
+# initial_time = time.time()
+scrapedata('112178807_PK-1263650772')
+# print("TOTAL TIME TAKEN FOR 1 SKU: ",time.time() - initial_time)
+
