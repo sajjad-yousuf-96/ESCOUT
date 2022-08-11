@@ -1,0 +1,68 @@
+{% extends 'PHT/main.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .btn-primhassan{
+        color: #F63854;
+        position:relative; 
+        top:2px;
+        border-color: violet;
+      }
+      .btn-primhassan:hover{
+      background-color: #F63854;
+      color: white;
+      font-size: bold;
+    }
+    table
+       {
+          color: #f05f6c;
+          position: relative;
+          border: 2px solid black;
+          width: 100%;
+      height: 100%;
+          font-family: 'Times New Roman', Times, serif;
+      }
+  
+      td,th {
+          position: relative;
+          border: 2px solid black;
+          width: 550px;
+          font-family: 'Times New Roman', Times, serif;
+      }
+      
+  </style>
+<div>
+    <div class="card card-body" style="width: 100%; height: 69px;">
+
+        <div>
+            <div class="input-group mb-3" style="margin: auto;">
+
+
+                <h2 style="width: 100%; text-align: center; color: #f05f6c;">PRODUCT DATABASE</h2>
+                
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card card-body" style="width: 100%;">
+
+        <div class="input-group mb-3" style="overflow-y: scroll; height: 350px;">
+            {% for product in products %}
+                <div class="card" style="width: 15rem;height: fit-content;">
+                    <div class="card-body">
+                        <h5 class="card-title">Category: {{product.category_name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Price:  {{product.product_price}}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">Rating: {{product.product_rating}}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">Review: {{product.product_review}}</h6>
+                        <p class="card-text">Title: {{product.product_title}}</p>
+                        <!-- <a href="#" class="card-link">Card link</a> -->
+                        <a href="{{product.product_url}}" class="card-link">Product URL</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

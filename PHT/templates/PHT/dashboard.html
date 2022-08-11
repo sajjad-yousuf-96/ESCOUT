@@ -7,16 +7,18 @@
 <br>
 <style>
 	.btn-primary {
-		color: #080103;
+		color: white;
 		background-color: #f05f6c;
 		font-size: large;
+		font-weight: bold;
 		border-color: #f05f6c;
 	}
 
 	.btn-primary:hover {
-		background-color: #080103;
+		background-color: white;
 		font-size: bold;
 		color: #f05f6c;
+		border-color: #f05f6c;
 	}
 
 	.btn-primhassan {
@@ -40,112 +42,225 @@
 		border-color: #F63854;
 	}
 
-	table,
+
 	td {
 		color: #f05f6c;
 		position: relative;
-		border: 2px solid black;
+		/* border: 2px solid black; */
 		width: 388px;
 		font-family: 'Times New Roman', Times, serif;
 	}
 
 	th {
 		position: relative;
-		border: 2px solid black;
+		/* border: 2px solid black; */
 		width: 250px;
 		font-family: 'Times New Roman', Times, serif;
 	}
+
+
+	.card-title-01 {
+		font-weight: bold;
+		font-size: 30px;
+		margin: 20px 0px;
+	}
+
+	.card-text-01 {
+		width: 150px;
+		font-weight: bold;
+		margin: 0px auto;
+		font-size: 50px;
+	}
+
+	.extra {
+		margin-top: 30px;
+		margin-bottom: 0px;
+	}
+
+	#card3 {
+		background: rgb(240, 71, 111);
+		background: linear-gradient(90deg, rgba(240, 71, 111, 1) 47%, rgba(242, 109, 140, 0.8379726890756303) 100%);
+	}
+
+	#card2 {
+		background: rgb(172, 152, 239);
+		background: linear-gradient(90deg, rgba(172, 152, 239, 1) 52%, rgba(190, 173, 241, 0.8519782913165266) 100%);
+	}
+
+	#card1 {
+		background: rgb(71, 35, 217);
+		background: linear-gradient(90deg, rgba(71, 35, 217, 1) 67%, rgba(71, 35, 217, 0.6755077030812324) 100%);
+	}
+
+	.custom-card {
+		color: white;
+	}
+
+	/* for custom table */
+	.main {
+		padding: 0px 120px;
+	}
+
+	th.custom-th,
+	td.custom-td {
+		text-align: center;
+		color: black;
+	}
+
+	/* radio buttons etc */
 </style>
-<div class="card card-body" style="margin-top: -31px;">
+<!-- datatatttatat -->
+<div class="container-fluid" style="padding-top: 15px !important;">
+	<!-- <h1>Dashboard</h1> -->
+	<div class="row">
+		<div class="custom-card col" style="margin: 5px 10px;" id="card1">
+			<div class="card-body">
+				<h5 class="card-title-01">AVERAGE PRICE</h5>
+				<p class="card-text-01">{{avgpricelst}}</p>
+				<p class="extra"><i class="fas fa-arrow-up fa-lg"></i> Total Average <b>Price</b></p>
+				<!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+			</div>
+		</div>
+		<div class="custom-card col" style="margin: 5px 10px;" id="card2">
+			<div class="card-body">
+				<h5 class="card-title-01">AVERAGE RATINGS</h5>
+				<p class="card-text-01">{{avgratinglst}}</p>
+				<p class="extra"><i class="fas fa-arrow-up fa-lg"></i> Total Average <b>Ratings</b></p>
+				<!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+			</div>
+		</div>
+		<div class="custom-card col" style="margin: 5px 10px;" id="card3">
+			<div class="card-body">
+				<h5 class="card-title-01">AVERAGE REVIEWS</h5>
+				<p class="card-text-01">{{avgreviewlst}}/5</p>
+				<p class="extra"><i class="fas fa-arrow-up fa-lg"></i> Total Average <b>Reviews</b></p>
+				<!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+			</div>
+		</div>
+	</div>
+	<!-- newwwww -->
+
+</div>
+<div class="container-fluid mt-4">
+	<h1 style="margin-bottom: 0px">PRODUCT TRACKING</h1>
+	<hr>
+	<br>
 
 	<form method="POST" action="">
 		<!-- <input class="btn login_btn"  value="Login"> -->
 		{% csrf_token %}
-		<div class="input-group mb-3">
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="radio" name="URLS" value="URLS">
-				<label class="form-check-label" for="URLS">
-					URLS
-				</label>
+		<div>
+			<div class="row mb-1">
+				<div class="col-sm-7 my-1">
+					<!-- <label class="sr-only" for="inlineFormInputGroupUsername">Username</label> -->
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text"><i class="fas fa-external-link-alt"></i></div>
+						</div>
+						<input type="text" name="urls" placeholder="Enter URL OR SKU NUMBER of Product..."
+							class="form-control" value="{{urls}}">
+					</div>
+				</div>
+				<div class="form-check form-check-inline col-sm-2 m-1"
+					style="background-color: #cdcccc;padding:0px 40px;border-radius: 8px;font-weight: bold;margin-left: 7% !important;">
+					<input class="form-check-input" type="radio" name="URLS" value="URLS">
+					<label class="form-check-label" for="URLS">
+						URLS
+					</label>
+				</div>
+				<div class="form-check form-check-inline col-sm-2 m-1"
+					style="background-color: #cdcccc;padding:0px 40px;border-radius: 8px;font-weight: bold;">
+					<input class="form-check-input" type="radio" name="URLS" value="SKU">
+					<label class="form-check-label" for="SKU">
+						SKU
+					</label>
+				</div>
 			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="radio" name="URLS" value="SKU">
-				<label class="form-check-label" for="SKU">
-					SKU
-				</label>
-			</div>
-			<input class="btn btn-primary  btn-sm btn-block" type="submit" value="Add-Product">
+			<input class="btn btn-primary  btn-sm" type="submit" value="Add-Product" style="width: 100%;">
+			<!-- <br /> <br> -->
 
+
+			<!-- 
 			<div class="input-group-append">
 				<span class="input-group-text"><i class="fas fa-external-link-alt"></i></span>
 			</div>
 
 			<input type="text" name="urls" placeholder="Enter Url of Daraz of Product OR SKU-NUMBER of Product..."
-				class="form-control" value="{{urls}}">
+				class="form-control" value="{{urls}}"> -->
 
 		</div>
+		</form>
+		<br>
+		<div
+			style="width: 100%; height: 20px; border-bottom: 1px solid black; text-align: center; margin-top: 5px;margin-bottom: 20px;">
+			{% for message in messages|slice:":1" %}
+				<div class="alert alert-danger" role="alert">
+				<i class="fa-solid fa-circle-exclamation"></i><a href="#" class="alert-link" >Error Occured: {{message}}</a>
+				</div>
+			{% endfor %}
+		</div>
+		<br>
 
+	
+</div>
+<!-- export file button form -->
+<div class="container-fluid">
+	<form method="POST" action="/exporttocsv/" enctype="multipart/form-data">
+		{% csrf_token %}
+		<div class="textboxes mb-1">
+			<!-- <label for="formFile" class="form-label">Default file input example</label> -->
+			<input class="form-control" type="file" name="SAJJAD">
+			<!-- <input name="SAJJAD" type="file" /> -->
+		</div>
+		<!-- <input class="btn btn-primary  btn-sm" type="submit" value="Export File" style="width: 100%;"> -->
+		<button class="btn btn-primary  btn-sm" name="importcsv" type="file" style="width: 100%;">Import File <i
+				class="fa fa-file-csv"></i></button>
 	</form>
 </div>
-<div class="row">
+<br>
 
-	<div class="col-md-5" style="position: relative;left: 11px;">
-		<h5 style="position: relative; 
-        color: #f05f6c;
-    ">PRODUCT TRACKING</h5>
-		<hr>
-		<form method="POST" action="/exporttocsv/" enctype="multipart/form-data">
-			{% csrf_token %}
-			<div>
-				<span class="input-group-text"><h6>Export To CSV</h6><button name="exportcsv" style="
-					position: absolute;
-					right: 27px;
-					width: 6%;
-					color: darkgreen;
-					background-color: springgreen;
-				"type="submit" >
-					<i class="fa fa-file-csv"></i>
-				</button>
-				</span>
-				<span class="input-group-text">
-				<!-- <h6>Import From CSV</h6><button name="importcsv" style="
-					position: absolute;
-					right: 27px;
-					width: 6%;
-					color: darkgreen;
-					background-color: springgreen;
-				"type="file" >
-					<i class="fa fa-file-csv"></i>
-				</button> -->
-				<label class="custom-file-upload">
-					Import From CSV
-					<input  name="SAJJAD" type="file"/>
-					<button name="importcsv" style="
-					position: absolute;
-					right: 27px;
-					width: 6%;
-					color: darkgreen;
-					background-color: springgreen;
-				"type="file" >
-					<i class="fa fa-file-csv"></i>
-				</button>
-				</label>
-				</span>
-			</div>
-		<div class="card card-body" style="position: relative;">
+<div class="container-fluid" style="margin-top: 20px;">
+	<h1 style="margin-bottom: 0px">TRACKED DATA</h1>
+	<hr>
 
-			<div>
-				<div>
-					{% for data in datas %}
-					<h6>{{data.item_name}}<a class="btn btn-primhassan" href="{% url 'product' data.id  %}">View</a>
-					</h6>
-					{% endfor %}
-				</div>
-			</div>
+</div>
+<!-- fas fa-sync-alt -->
+<div class="main">
+	<form method="POST" action="/exporttocsv/" enctype="multipart/form-data">
+		{% csrf_token %}
+		<div style="display: flex;justify-content:end;margin-bottom: 5px;">
+			<button name="exportcsv" type="submit"
+			style="background-color: rgb(0, 174, 255);border-radius: 5px;padding: 5px 40px;font-weight: bold;margin-right: 17px;">
+				Scrape All<i class="fas fa-sync-alt"></i></button>
+			<button name="exportcsv" type="submit"
+				style="background-color: springgreen;border-radius: 5px;padding: 5px 40px;font-weight: bold;">Export
+				File <i class="fa fa-file-csv"></i></button>
 		</div>
-	</div>
+	</form>
 
-	<div class="col-md-7" style="
+	<table class="table" style="box-shadow: 0px 8px 24px rgba(149, 157, 165, 0.2);">
+		<thead style="background-color: #ff5c56;">
+			<tr>
+				<th class="custom-th" scope="col">#</th>
+				<th class="custom-th" scope="col">Product</th>
+				<th class="custom-th" scope="col">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for data in datas %}
+			<tr>
+				<th class="custom-th" scope="row">{{ forloop.counter }}</th>
+				<td class="custom-td" style="text-align: start;">{{data.item_name}}</td>
+				<td class="custom-td"><a class="btn btn-primhassan" style="width: 60%;"
+						href="{% url 'product' data.id  %}">View / Track</a></td>
+			</tr>
+			{% endfor %}
+
+		</tbody>
+	</table>
+</div>
+
+	<!-- <div class="col-md-7" style="
     position: relative;
     left: -7px;
     color: #f05f6c;
@@ -155,28 +270,98 @@
 		<div class="card card-body" style="
 		height: 415px;
 		color: #f05f6c;">
-		<h5 style="color: #f05f6c;">Tracked Data Average </h5>
-		<table style="width: 100%; height: 100%; font-size: 300%;">
-			<thead>
+			<h5 style="color: #f05f6c;">Tracked Data Average </h5>
+			<table style="width: 100%; height: 100%; font-size: 300%;">
+				<thead>
 				<tbody>
-				<tr class="table100-head">
-					<th class="column1">Avg Price</th>
-					<td class="column2">Rs {{avgpricelst}}</td>
-				</tr>
+					<tr class="table100-head">
+						<th class="column1">Avg Price</th>
+						<td class="column2">Rs {{avgpricelst}}</td>
+					</tr>
 
-				<tr>
-					<th>Avg Ratings</th>
-					<td>{{avgratinglst}}</td>
-				</tr>
-				<tr>
-					<th>Avg Review</th>
-					<td>{{avgreviewlst}}/5</td>
-				</tr>
+					<tr>
+						<th>Avg Ratings</th>
+						<td>{{avgratinglst}}</td>
+					</tr>
+					<tr>
+						<th>Avg Review</th>
+						<td>{{avgreviewlst}}/5</td>
+					</tr>
 				</tbody>
-			</thead>
-			
+				</thead>
+
 		</div>
 
-	</div>
+	</div> -->
 
 	{% endblock %}
+
+
+
+
+
+
+
+
+
+
+	
+
+<!-- <div class="row">
+
+	<div class="col-md-5" style="position: relative;left: 11px">
+		<h5 style="position: relative; 
+        color: #f05f6c;
+    ">PRODUCT TRACKING</h5>
+		<hr>
+		<form method="POST" action="/exporttocsv/" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div>
+				<span class="input-group-text">
+					<h6>Export To CSV</h6><button name="exportcsv" style="
+					position: absolute;
+					right: 27px;
+					width: 6%;
+					color: darkgreen;
+					background-color: springgreen;
+				" type="submit">
+						<i class="fa fa-file-csv"></i>
+					</button>
+				</span>
+				<span class="input-group-text">
+					<!-- <h6>Import From CSV</h6><button name="importcsv" style="
+					position: absolute;
+					right: 27px;
+					width: 6%;
+					color: darkgreen;
+					background-color: springgreen;
+				"type="file" >
+					<i class="fa fa-file-csv"></i>
+				</button> -->
+					<!-- <label class="custom-file-upload">
+						Import From CSV
+						<input name="SAJJAD" type="file" />
+						<button name="importcsv" style="
+					position: absolute;
+					right: 27px;
+					width: 6%;
+					color: darkgreen;
+					background-color: springgreen;
+				" type="file">
+							<i class="fa fa-file-csv"></i>
+						</button>
+					</label>
+				</span>
+			</div>
+			<div class="card card-body" style="position: relative;">
+
+				<div>
+					<div>
+						{% for data in datas %}
+						<h6>{{data.item_name}}<a class="btn btn-primhassan" href="{% url 'product' data.id  %}">View</a>
+						</h6>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+	</div> --> -->

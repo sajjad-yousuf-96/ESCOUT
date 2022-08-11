@@ -34,7 +34,7 @@ def scrapedataurl(urls):
     base_data = main_data.get('data').get('root').get('fields')
     
     store_discount = base_data.get('skuInfos').get('0').get('price').get('discount')
-    price = base_data.get('skuInfos').get('0').get('price').get('originalPrice').get('value')
+    price = base_data.get('skuInfos').get('0').get('price').get('originalPrice').get('value') if base_data.get('skuInfos').get('0').get('price').get('originalPrice') else base_data.get('skuInfos').get('0').get('price').get('salePrice').get('value')
     sale_price = base_data.get('skuInfos').get('0').get('price').get('salePrice').get('value')
     stock = base_data.get('skuInfos').get('0').get('stock')
     shopname = base_data.get('seller').get('name')

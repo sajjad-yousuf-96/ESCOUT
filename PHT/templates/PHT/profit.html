@@ -141,7 +141,7 @@
 		<hr>
 		<div class="card card-body">
 			<div style="width: 100%;">
-            <div style="width: 100%; text-align: center; position: relative; top: 25px;">
+            <div style="width: 100%; text-align: center; position: relative;">
                 <h4>PROFIT CALCULATION</h4>
                 <table>
                     <tr>
@@ -196,9 +196,39 @@
             </div>
             
 		</div>
+
 	</div>
-
+    <div class="card">
+        <div class="card">
+            <canvas id="chart"></canvas>
+        </div>
+    </div>  
 </div>
-
+<script>
+    let ctx = document.getElementById("chart").getContext("2d");
+    let chart = new Chart(ctx, {
+    type: "pie",
+    data: {
+     labels: [{% for vals in namelst %}'{{vals}}',{%  endfor %}],
+    //  labels: ['2022-07-28','2022-08-01'],
+     datasets: [
+      {
+        label: "Stock",
+        backgroundColor: [{% for val in color %}'{{val}}',{%  endfor %}],
+        borderColor: "black",
+        
+        data:[{% for val in graphlst %}'{{val}}',{%  endfor %}]
+        // data:[200,22000]
+      }
+     ]
+    },
+    options: {
+     title: {
+      text: "hover mouse to check Value",
+      display: true
+     }
+    }
+  });
+  </script>
 {% endblock %}
 

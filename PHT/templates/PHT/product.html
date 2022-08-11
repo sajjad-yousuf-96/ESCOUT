@@ -41,7 +41,13 @@
   color: #f05f6c;
   margin-left: 26px;
 ">PRODUCT TRACKING</h5>
-  
+  <div class="col-sm-12">
+  {% for message in messages %}
+    <div class="alert alert-danger" role="alert" style="font-size: 20px;">
+      <i class="fas fa-exclamation-circle"></i>       <a href="#" class="alert-link" >       Error Occured: {{message}}</a>
+    </div>
+  {% endfor %}
+</div>
   <hr>
   <div class="card card-body" style="
   width: 100%;
@@ -124,7 +130,7 @@
    datasets: [
     {
       label: "Stock",
-      backgroundColor: "#F63854",
+      backgroundColor: [{% for val in color %}'{{val}}',{%  endfor %}],
       borderColor: "black",
       
       data:[{% for val in datalst %}{{val}},{%  endfor %}]
