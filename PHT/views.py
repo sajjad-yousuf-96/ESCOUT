@@ -314,6 +314,45 @@ def exporttocsv(request):
             writer.writerows(arr)
         print("csv")
         return redirect("dashboard")
+    elif 'refresh' in request.POST:
+        userid=request.user.id
+        datas=UserScrapeData.objects.filter(userid=userid)
+        if datas.exists():
+            for i in datas:
+                d=scrapedata(i.sku)
+                obj=UserProductsTracking.objects.filter(product_id=i.id)
+                print(obj)
+                if obj.exists():
+                    # print("s",data)
+                    print('if')
+                    # obj=UserProductsTracking.objects.create(userid=userid,sku=data.sku,stock=data.stock,ratings=data.ratings,item_name=data.item_name,shop_name=data.shop_name,item_price=data.item_price,brand=data.brand,review=data.review,time=data.time,date=data.date,product_id=pk_id)
+                    # obj.save()
+                    # print("WAit",seconds,"Seconds")
+                    # time.sleep(seconds)
+                    print(d[1])
+                    times=datetime.datetime.now()
+                    times=times.strftime("%H:%M:%S")
+                    dates=datetime.date.today()
+                    obj=UserProductsTracking.objects.create(userid=userid,sku=d[1],stock=d[0],ratings=d[2],item_name=d[3],shop_name=d[5],item_price=d[4],brand=d[6],review=d[7],time=times,date=dates,product_id=i.id)
+                    obj.save()
+                elif d:
+                    # print("s",data)
+                    print('elif')
+                    obj=UserProductsTracking.objects.create(userid=userid,sku=datas.sku,stock=datas.stock,ratings=datas.ratings,item_name=datas.item_name,shop_name=datas.shop_name,item_price=datas.item_price,brand=datas.brand,review=datas.review,time=datas.time,date=datas.date,product_id=i.id)
+                    obj.save()
+                    # print("WAit",seconds,"Seconds")
+                    # time.sleep(seconds)
+                    print(d[1])
+                    times=datetime.datetime.now()
+                    times=times.strftime("%H:%M:%S")
+                    dates=datetime.date.today()
+                    obj=UserProductsTracking.objects.create(userid=userid,sku=d[1],stock=d[0],ratings=d[2],item_name=d[3],shop_name=d[5],item_price=d[4],brand=d[6],review=d[7],time=times,date=dates,product_id=i.id)
+                    obj.save()
+                else:
+                    pass
+            return redirect('dashboard')
+        else:
+            return redirect('dashboard')
     else:
         user=request.user.id
         # print(request.POST)
