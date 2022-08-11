@@ -178,8 +178,13 @@
 			</div>
 			<input class="btn btn-primary  btn-sm" type="submit" value="Add-Product" style="width: 100%;">
 			<!-- <br /> <br> -->
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> 44194ee4bab8e0d00d53522fe1e798f9508aeedc
 			<!-- 
 			<div class="input-group-append">
 				<span class="input-group-text"><i class="fas fa-external-link-alt"></i></span>
@@ -187,6 +192,7 @@
 
 			<input type="text" name="urls" placeholder="Enter Url of Daraz of Product OR SKU-NUMBER of Product..."
 				class="form-control" value="{{urls}}"> -->
+<<<<<<< HEAD
 
 		</div>
 		</form>
@@ -200,6 +206,8 @@
 			{% endfor %}
 		</div>
 		<br>
+=======
+>>>>>>> 44194ee4bab8e0d00d53522fe1e798f9508aeedc
 
 	
 </div>
@@ -212,6 +220,7 @@
 			<input class="form-control" type="file" name="SAJJAD">
 			<!-- <input name="SAJJAD" type="file" /> -->
 		</div>
+<<<<<<< HEAD
 		<!-- <input class="btn btn-primary  btn-sm" type="submit" value="Export File" style="width: 100%;"> -->
 		<button class="btn btn-primary  btn-sm" name="importcsv" type="file" style="width: 100%;">Import File <i
 				class="fa fa-file-csv"></i></button>
@@ -222,6 +231,17 @@
 <div class="container-fluid" style="margin-top: 20px;">
 	<h1 style="margin-bottom: 0px">TRACKED DATA</h1>
 	<hr>
+=======
+		<br>
+		<div
+			style="width: 100%; height: 20px; border-bottom: 1px solid black; text-align: center; margin-top: 5px;margin-bottom: 20px;">
+			<span style="font-size: 11px;font-weight: bold; background-color: #F3F5F6; padding: 0 10px;">
+				OR
+				<!--Padding is optional-->
+			</span>
+		</div>
+		<br>
+>>>>>>> 44194ee4bab8e0d00d53522fe1e798f9508aeedc
 
 </div>
 <!-- fas fa-sync-alt -->
@@ -259,7 +279,64 @@
 		</tbody>
 	</table>
 </div>
+<<<<<<< HEAD
 
+=======
+<!-- export file button form -->
+<div class="container-fluid">
+	<form method="POST" action="/exporttocsv/" enctype="multipart/form-data">
+		{% csrf_token %}
+		<div class="textboxes mb-1">
+			<!-- <label for="formFile" class="form-label">Default file input example</label> -->
+			<input class="form-control" type="file" name="SAJJAD">
+			<!-- <input name="SAJJAD" type="file" /> -->
+		</div>
+		<!-- <input class="btn btn-primary  btn-sm" type="submit" value="Export File" style="width: 100%;"> -->
+		<button class="btn btn-primary  btn-sm" name="importcsv" type="file" style="width: 100%;">Import File <i
+				class="fa fa-file-csv"></i></button>
+	</form>
+</div>
+<br>
+
+<div class="container-fluid" style="margin-top: 20px;">
+	<h1 style="margin-bottom: 0px">TRACKED DATA</h1>
+	<hr>
+
+</div>
+
+<div class="main">
+	<form method="POST" action="/exporttocsv/" enctype="multipart/form-data">
+		{% csrf_token %}
+		<div style="display: flex;justify-content:end;margin-bottom: 5px;">
+			<button name="exportcsv" type="submit"
+				style="background-color: springgreen;border-radius: 5px;padding: 5px 40px;font-weight: bold;">Export
+				File <i class="fa fa-file-csv"></i></button>
+		</div>
+	</form>
+
+	<table class="table" style="box-shadow: 0px 8px 24px rgba(149, 157, 165, 0.2);">
+		<thead style="background-color: #ff5c56;">
+			<tr>
+				<th class="custom-th" scope="col">#</th>
+				<th class="custom-th" scope="col">Product</th>
+				<th class="custom-th" scope="col">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for data in datas %}
+			<tr>
+				<th class="custom-th" scope="row">{{ forloop.counter }}</th>
+				<td class="custom-td" style="text-align: start;">{{data.item_name}}</td>
+				<td class="custom-td"><a class="btn btn-primhassan" style="width: 60%;"
+						href="{% url 'product' data.id  %}">View / Track</a></td>
+			</tr>
+			{% endfor %}
+
+		</tbody>
+	</table>
+</div>
+
+>>>>>>> 44194ee4bab8e0d00d53522fe1e798f9508aeedc
 	<!-- <div class="col-md-7" style="
     position: relative;
     left: -7px;
