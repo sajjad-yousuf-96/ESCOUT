@@ -1,4 +1,4 @@
-from webdriver_manager.chrome import ChromeDriverManager
+# from webdriver_manager.chrome import ChromeDriverManager
 # from .competitor import main
 import re
 import re
