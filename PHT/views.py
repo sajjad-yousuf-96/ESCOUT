@@ -1,3 +1,4 @@
+from pathlib import Path
 from pydoc import text
 from django import urls
 from django.shortcuts import render,redirect
@@ -7,10 +8,16 @@ from django.http import HttpResponse, request
 import pandas as pd
 from django.db.models import Q
 import datetime
+from django.core.files.storage import default_storage
+from PyQt5.QtWidgets import *
+from PyQt5 import uic
+from PyQt5.QtGui import *
+from PyQt5 import QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 import pandas as pd
 from random import randint
-from tkinter.filedialog import asksaveasfile
+# from tkinter.filedialog import asksaveasfile
 import csv
 from .scrapedataurl import scrapedataurl
 # import scrapy
@@ -284,13 +291,19 @@ def dashboard(request):
 def exporttocsv(request):
     # print(request.POST)
     if 'exportcsv' in request.POST:
-        def save():
-            files = [('Comma Separated Files', '*.csv')]
-            file = asksaveasfile(filetypes = files, defaultextension = files)
-            return file
-        a=save()
-        # print(type(a.name))
-        filename=a.name
+        # def save():
+        #     try:
+        #
+        #     except Exception as error:
+        #         print(error)
+        #     # files = [('Comma Separated Files', '*.csv')]
+        #     # file = asksaveasfile(filetypes = files, defaultextension = files)
+        #     # return file
+        #
+        # filename=save()
+        #
+        # print(filename)
+        # filename=a.name
         # print(a.get('name'))
         userid=request.user.id
 
@@ -314,8 +327,9 @@ def exporttocsv(request):
             arr.append(newlst)
         # print(arr)
             # break
-
-        with open(filename,'w') as f:
+        path_to_download_folder = str(os.path.join(Path.home(), "Downloads"))
+        print(path_to_download_folder)
+        with open(path_to_download_folder+'/exportdata.csv','w') as f:
             writer = csv.writer(f)
             writer.writerow(header)
             writer.writerows(arr)
