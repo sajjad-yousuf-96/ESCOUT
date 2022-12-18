@@ -9,11 +9,6 @@ import pandas as pd
 from django.db.models import Q
 import datetime
 from django.core.files.storage import default_storage
-from PyQt5.QtWidgets import *
-from PyQt5 import uic
-from PyQt5.QtGui import *
-from PyQt5 import QtWidgets
-from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 import pandas as pd
 from random import randint
