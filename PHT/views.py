@@ -257,7 +257,7 @@ def dashboard(request):
             if a.replace(',',''):
                 a=a.replace(',','')
             # print(a.isdigit())
-            avgpricelst.append(int(a))
+            avgpricelst.append(int(float((a))))
         avgpricelst=sum(avgpricelst)/len(avgpricelst)
 
         avgreviewlst=[]
@@ -267,7 +267,9 @@ def dashboard(request):
             if a.replace('/5',''):
                 a=a.replace('/5','')
             # print(a)
-            avgreviewlst.append(float(a))
+            #
+            if float(a):
+                avgreviewlst.append(float(a))
         avgreviewlst=sum(avgreviewlst)/len(avgreviewlst)
         avgreviewlst=round(avgreviewlst)
         # print(avgreviewlst)
