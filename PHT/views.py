@@ -324,14 +324,15 @@ def exporttocsv(request):
             arr.append(newlst)
         # print(arr)
             # break
-        path_to_download_folder = str(os.path.join(Path.home(), "Downloads"))
-        print(path_to_download_folder)
-        with open(path_to_download_folder+'/exportdata.csv','w') as f:
-            writer = csv.writer(f)
-            writer.writerow(header)
-            writer.writerows(arr)
-        print("csv")
-        return redirect("dashboard")
+        # path_to_download_folder = str(os.path.join(Path.home(), "Downloads"))
+        # print(path_to_download_folder)
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="csv_simple_write.csv"'
+        writer = csv.writer(response)
+        writer.writerow(header)
+        for data in arr:
+            writer.writerow(data)
+        return response
     elif 'refresh' in request.POST:
         userid=request.user.id
         datas=UserScrapeData.objects.filter(userid=userid)
